@@ -5,11 +5,11 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
 import de.aps.prinz_of_pc.PrinzGame;
 import de.aps.prinz_of_pc.fonts.MyFonts;
+import de.aps.prinz_of_pc.tool_methods.ToolMethods;
 
 public class MainMenuScreen implements Screen{
 
@@ -19,8 +19,8 @@ public class MainMenuScreen implements Screen{
 	
 	public MainMenuScreen(PrinzGame game) {
 		this.game = game;
-		fonts = new MyFonts();
-		layout = new GlyphLayout();
+		this.fonts = new MyFonts();
+		this.layout = new GlyphLayout();
 	}
 	
 	@Override
@@ -64,41 +64,21 @@ public class MainMenuScreen implements Screen{
 		fonts.arial.draw(game.batch, "Spiel beenden", positionXCloseGame, positionYCloseGame);
 		
 		// check if one button is clicked
-		if(Gdx.input.isButtonPressed(Buttons.LEFT) && checkIfMouseIsInTheArea(positionXStartGame, positionYStartGame, positionSecondXStartGame, positionSecondYStartGame, fonts.arial, startGame)){
+		if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionXStartGame, positionYStartGame, positionSecondXStartGame, positionSecondYStartGame, fonts.arial, startGame)){
 			this.dispose();
 			game.setScreen(new GameScreen(game));
 		} 
-		else if(Gdx.input.isButtonPressed(Buttons.LEFT) && checkIfMouseIsInTheArea(positionXDescription, positionYDescription, positionSecondXDescription, positionSecondYDescription, fonts.arial, description)){
+		else if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionXDescription, positionYDescription, positionSecondXDescription, positionSecondYDescription, fonts.arial, description)){
 			this.dispose();
 			game.setScreen(new DescriptionScreen(game));
-		} else if(Gdx.input.isButtonPressed(Buttons.LEFT) && checkIfMouseIsInTheArea(positionXCloseGame, positionYCloseGame, positionSecondXCloseGame, positionSecondYCloseGame, fonts.arial, closeGame)){
+		} else if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionXCloseGame, positionYCloseGame, positionSecondXCloseGame, positionSecondYCloseGame, fonts.arial, closeGame)){
 			Gdx.app.exit();
 		}
 		
 		game.batch.end();
 		
 	}
-	/**
-	 * Checks if the Mouse is between the parameters
-	 * @param firstX = Button down-left side
-	 * @param firstY = Button top-left side
-	 * @param secondX = Button down-right side
-	 * @param secondY = Button top-right side
-	 * @param font = Font of the button
-	 * @param str = Text of the button
-	 * @return
-	 */
-	private boolean checkIfMouseIsInTheArea(float firstX, float firstY, float secondX, float secondY, BitmapFont font, String str){
-		// correct the button area
-		layout.setText(font, str);
-		firstY -= layout.height;
-		secondY -= layout.height;
-		
-		if(Gdx.input.getX() > firstX && Gdx.input.getX() < secondX && PrinzGame.HEIGHT - Gdx.input.getY() > firstY && PrinzGame.HEIGHT - Gdx.input.getY() < secondY){
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public void resize(int width, int height) {

@@ -1,12 +1,9 @@
 package de.aps.prinz_of_pc.fonts;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-
-import de.aps.prinz_of_pc.PrinzGame;
 
 public class MyFonts{
 	
