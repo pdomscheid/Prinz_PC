@@ -4,7 +4,7 @@
   <image source="../../Downloads/allesandere.png" width="1024" height="2016"/>
   <tile id="192">
    <properties>
-    <property name="blocked" type="bool" value="true"/>
+    <property name="geblockt" value="blocked"/>
    </properties>
   </tile>
  </tileset>
