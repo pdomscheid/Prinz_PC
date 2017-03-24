@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 public class MyFonts{
 	
 	public BitmapFont arial;
+	public BitmapFont description;
 	
 	public MyFonts(){
+		// Arial
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Arial.ttf"));
 
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -19,6 +21,12 @@ public class MyFonts{
 		// These characters should not repeat! 
 
 		arial = generator.generateFont(parameter);
+		
+		// Description (Arial)
+		parameter.size = 24;
+		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
+		description = generator.generateFont(parameter);
+		
 		generator.dispose();
 	}
 
