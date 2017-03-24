@@ -25,9 +25,9 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
     
     @Override
     public void create () {
-
+//test
     	batch = new SpriteBatch();
-    	texture = new Texture(Gdx.files.internal("pikachu.png"));
+    	texture = new Texture(Gdx.files.internal("hauptchar.png"));
         sprite = new Sprite(texture);
         
         float w = Gdx.graphics.getWidth();
