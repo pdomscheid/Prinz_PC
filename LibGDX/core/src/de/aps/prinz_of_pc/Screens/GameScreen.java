@@ -51,7 +51,11 @@ public class GameScreen implements Screen{
 		
 	}
 	
+	/**
+	 * Creates the menue-bar in the Screen
+	 */
 	private void createMenue(){
+		//Set positions for every single Button
 		float positionY = menueHeight;
 		float gap = PrinzGame.WIDTH * 0.15f;
 		
@@ -84,6 +88,13 @@ public class GameScreen implements Screen{
 		drawFont(continues, positionXContinues, positionY, positionSecondXContinues);
 		drawFont(close, positionXClose, positionY, positionSecondXClose);	}
 	
+	/**
+	 * Draws the Fonts in Black or in Gray (hovered = true)
+	 * @param str = String to draw
+	 * @param firstX = Position bottom-left
+	 * @param firstY = Position top -left
+	 * @param secondX = Position bottom-right
+	 */
 	private void drawFont(String str, float firstX, float firstY, float secondX){
 		if(checkHoverEffect(firstX, secondX)){
 			fonts.menue.setColor(Color.GRAY);
@@ -94,12 +105,24 @@ public class GameScreen implements Screen{
 		fonts.menue.setColor(Color.BLACK);
 	}
 	
+	/**
+	 * If one Button is pressed the method will react 
+	 * @param positionXRestart
+	 * @param positionSecondXRestart
+	 * @param positionXPause
+	 * @param positionSecondXPause
+	 * @param positionXContinues
+	 * @param positionSecondXContinues
+	 * @param positionXClose
+	 * @param positionSecondXClose
+	 */
 	private void checkIfButtonIsPressed(float positionXRestart, float positionSecondXRestart,
 										float positionXPause, float positionSecondXPause,
 										float positionXContinues, float positionSecondXContinues,
 										float positionXClose, float positionSecondXClose){
 		float boxTop = PrinzGame.HEIGHT;
 		if(Gdx.input.isButtonPressed(Buttons.LEFT)){
+			// Restart/Pause/Continues or Close is pressed
 			if(ToolMethods.checkIfMouseIsInTheArea(positionXRestart, boxBottom, positionSecondXRestart, boxTop)){
 				this.dispose();
 				game.setScreen(new GameScreen(game));
@@ -114,6 +137,12 @@ public class GameScreen implements Screen{
 		}
 	}
 	
+	/**
+	 * Checks if the mouse is in the box 
+	 * @param firstX
+	 * @param secondX
+	 * @return
+	 */
 	private boolean checkHoverEffect(float firstX, float secondX){
 		float boxTop = PrinzGame.HEIGHT;
 		if(ToolMethods.checkIfMouseIsInTheArea(firstX, boxBottom, secondX, boxTop)){
@@ -122,6 +151,9 @@ public class GameScreen implements Screen{
 		return false;
 	}
 	
+	/**
+	 * Draws the menuebar 
+	 */
 	private void drawMenuBox(){
 		float positionX = 0;
 		float positionY = boxBottom;
