@@ -32,7 +32,7 @@ public class MainMenuScreen extends Games implements Screen{
 		this.game = game;
 		this.fonts = new MyFonts();
 		this.layout = new GlyphLayout();
-		this.background = new Texture("MenueScreen.png");
+		this.background = new Texture("MenueScreen.jpeg");
 		shapeRenderer = new ShapeRenderer();
 	}
 
@@ -72,8 +72,12 @@ public class MainMenuScreen extends Games implements Screen{
 		float positionSecondYBoxCloseGame = positionYBoxCloseGame + boxHeight;
 
 		// Here begins the drawing od the screen
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		game.batch.begin();
+		game.batch.draw(background, 0, 10);
+		game.batch.end();
 		
 		drawBoxes(positionXStartGame, positionYBoxStartGame, positionYBoxDescription, positionYBoxCloseGame);
 		
@@ -97,7 +101,7 @@ public class MainMenuScreen extends Games implements Screen{
 		float positionXBox = positionXStartGame - boxGapX;
 		
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(Color.WHITE);
+		shapeRenderer.setColor(Color.DARK_GRAY);
 		shapeRenderer.rect(positionXBox, positionYFirstBox, boxWidth, boxHeight);
 		shapeRenderer.rect(positionXBox, positionYSecondBox, boxWidth, boxHeight);
 		shapeRenderer.rect(positionXBox, positionYThirdBox, boxWidth, boxHeight);
@@ -163,7 +167,7 @@ public class MainMenuScreen extends Games implements Screen{
 	public void dispose() {
 		super.dispose();
 		shapeRenderer.dispose();
-
+		background.dispose();
 	}
 
 }

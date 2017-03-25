@@ -46,7 +46,7 @@ public class Games implements Screen{
 		} else{
 			font.draw(game.batch, str, firstX, firstY);
 		}
-		font.setColor(Color.BLACK);
+		font.setColor(Color.WHITE);
 	}
 	
 	/**

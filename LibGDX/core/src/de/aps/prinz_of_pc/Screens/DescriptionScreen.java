@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -16,6 +17,7 @@ public class DescriptionScreen extends Games implements Screen{
 
 	GlyphLayout layout;
 	ShapeRenderer shapeRenderer;
+	Texture background;
 	final float boxWidth = 275;
 	final float boxHeight = 100;
 
@@ -25,6 +27,7 @@ public class DescriptionScreen extends Games implements Screen{
 		this.fonts = new MyFonts();
 		this.layout = new GlyphLayout();
 		this.shapeRenderer = new ShapeRenderer();
+		this.background = new Texture("MenueScreen.jpeg");
 	}
 
 	@Override
@@ -42,11 +45,18 @@ public class DescriptionScreen extends Games implements Screen{
 		float positionYBack = PrinzGame.HEIGHT * 0.95f;
 		float positionXSecondBack = positionXBack + layout.width;
 
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+		
+		// Drwas background
+		game.batch.begin();
+		game.batch.draw(background, 0, 10);
+		game.batch.end();
+		
+		//Draws menue Box
 		drawBoxes(positionXBack, positionYBack);
 
+		// Draws fonts
 		game.batch.begin();
 
 		drawFont(menu, positionXBack, positionXSecondBack, positionYBack, PrinzGame.HEIGHT - 
@@ -72,7 +82,7 @@ public class DescriptionScreen extends Games implements Screen{
 		float positionXDescription = PrinzGame.WIDTH / 2 - layout.width / 2;
 		float positionYDescription = PrinzGame.HEIGHT / 2 + layout.height / 2;
 
-		fonts.description.setColor(Color.BLACK);
+		fonts.description.setColor(Color.WHITE);
 		fonts.description.draw(game.batch, description, positionXDescription, positionYDescription);
 	}
 
@@ -81,7 +91,8 @@ public class DescriptionScreen extends Games implements Screen{
 		layout.setText(fonts.arial, heading);
 		float positionXHeading = PrinzGame.WIDTH / 2 - layout.width / 2;
 		float positionYHeading = PrinzGame.HEIGHT * 0.95f;
-
+		
+		fonts.arial.setColor(Color.WHITE);
 		fonts.arial.draw(game.batch, heading, positionXHeading, positionYHeading);
 	}
 
@@ -92,8 +103,9 @@ public class DescriptionScreen extends Games implements Screen{
 		float positionYBox = positionY - boxGapY;
 
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(Color.WHITE);
+		shapeRenderer.setColor(Color.DARK_GRAY);
 		shapeRenderer.rect(positionXBox, positionYBox, boxWidth, boxHeight);
+		shapeRenderer.rect(45, 200, 1000, 300);
 		shapeRenderer.end();
 
 		checkIfButtonIsClicked(positionXBox, positionYBox);
