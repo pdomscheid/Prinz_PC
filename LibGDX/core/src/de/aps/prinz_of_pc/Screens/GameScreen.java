@@ -3,7 +3,6 @@ package de.aps.prinz_of_pc.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,20 +12,20 @@ import de.aps.prinz_of_pc.PrinzGame;
 import de.aps.prinz_of_pc.fonts.MyFonts;
 import de.aps.prinz_of_pc.tool_methods.ToolMethods;
 
-public class GameScreen implements Screen{
+public class GameScreen extends Games implements Screen{
 
-	PrinzGame game;
-	MyFonts fonts;
 	ShapeRenderer shapeRenderer;
 	GlyphLayout layout;
 	final float boxWidth = PrinzGame.WIDTH;
 	final float boxHeight = 100;
 	final float boxBottom = PrinzGame.HEIGHT * 0.95f;
+	final float boxTop = PrinzGame.HEIGHT;
 	final float menueHeight = PrinzGame.HEIGHT - PrinzGame.HEIGHT * 0.015f;
 	boolean pause = false;
 	
 	
 	public GameScreen(PrinzGame game){
+		super(game);
 		this.game = game;
 		this.fonts = new MyFonts();
 		this.shapeRenderer = new ShapeRenderer();
@@ -83,27 +82,11 @@ public class GameScreen implements Screen{
 								positionSecondXPause, positionXContinues, positionSecondXContinues, 
 								positionXClose, positionSecondXClose);
 		
-		drawFont(restart, positionXRestart, positionY, positionSecondXRestart);
-		drawFont(pause, positionXPause, positionY, positionSecondXPause);
-		drawFont(continues, positionXContinues, positionY, positionSecondXContinues);
-		drawFont(close, positionXClose, positionY, positionSecondXClose);	}
-	
-	/**
-	 * Draws the Fonts in Black or in Gray (hovered = true)
-	 * @param str = String to draw
-	 * @param firstX = Position bottom-left
-	 * @param firstY = Position top -left
-	 * @param secondX = Position bottom-right
-	 */
-	private void drawFont(String str, float firstX, float firstY, float secondX){
-		if(checkHoverEffect(firstX, secondX)){
-			fonts.menue.setColor(Color.GRAY);
-			fonts.menue.draw(game.batch, str, firstX, firstY);
-		} else{
-			fonts.menue.draw(game.batch, str, firstX, firstY);
+		drawFont(restart, positionXRestart, positionSecondXRestart, positionY, boxBottom, boxTop, fonts.menue);
+		drawFont(pause, positionXPause, positionSecondXPause, positionY, boxBottom, boxTop, fonts.menue);
+		drawFont(continues, positionXContinues, positionSecondXContinues, positionY, boxBottom, boxTop, fonts.menue);
+		drawFont(close, positionXClose, positionSecondXClose, positionY, boxBottom, boxTop, fonts.menue);	
 		}
-		fonts.menue.setColor(Color.BLACK);
-	}
 	
 	/**
 	 * If one Button is pressed the method will react 
@@ -135,20 +118,6 @@ public class GameScreen implements Screen{
 				game.setScreen(new MainMenuScreen(game));
 			}
 		}
-	}
-	
-	/**
-	 * Checks if the mouse is in the box 
-	 * @param firstX
-	 * @param secondX
-	 * @return
-	 */
-	private boolean checkHoverEffect(float firstX, float secondX){
-		float boxTop = PrinzGame.HEIGHT;
-		if(ToolMethods.checkIfMouseIsInTheArea(firstX, boxBottom, secondX, boxTop)){
-			return true;
-		}
-		return false;
 	}
 	
 	/**
@@ -189,7 +158,8 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		super.dispose();
+		shapeRenderer.dispose();
 		
 	}
 

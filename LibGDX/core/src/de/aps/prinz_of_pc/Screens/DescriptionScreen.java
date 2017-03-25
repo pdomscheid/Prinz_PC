@@ -12,16 +12,15 @@ import de.aps.prinz_of_pc.PrinzGame;
 import de.aps.prinz_of_pc.fonts.MyFonts;
 import de.aps.prinz_of_pc.tool_methods.ToolMethods;
 
-public class DescriptionScreen implements Screen{
+public class DescriptionScreen extends Games implements Screen{
 
-	PrinzGame game;
-	MyFonts fonts;
 	GlyphLayout layout;
 	ShapeRenderer shapeRenderer;
 	final float boxWidth = 275;
 	final float boxHeight = 100;
 
 	public DescriptionScreen(PrinzGame game) {
+		super(game);
 		this.game = game;
 		this.fonts = new MyFonts();
 		this.layout = new GlyphLayout();
@@ -41,6 +40,7 @@ public class DescriptionScreen implements Screen{
 		layout.setText(fonts.arial, menu);
 		float positionXBack = PrinzGame.WIDTH * 0.025f;
 		float positionYBack = PrinzGame.HEIGHT * 0.95f;
+		float positionXSecondBack = positionXBack + layout.width;
 
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -49,8 +49,8 @@ public class DescriptionScreen implements Screen{
 
 		game.batch.begin();
 
-		fonts.arial.setColor(Color.BLACK);
-		fonts.arial.draw(game.batch, menu, positionXBack, positionYBack);
+		drawFont(menu, positionXBack, positionXSecondBack, positionYBack, PrinzGame.HEIGHT - 
+				PrinzGame.HEIGHT * 0.1f, PrinzGame.HEIGHT, fonts.arial);
 		createHeading();
 		createDescription();
 
@@ -91,12 +91,12 @@ public class DescriptionScreen implements Screen{
 		float positionXBox = positionX - boxGapX;
 		float positionYBox = positionY - boxGapY;
 
-		checkIfButtonIsClicked(positionXBox, positionYBox);
-		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.WHITE);
 		shapeRenderer.rect(positionXBox, positionYBox, boxWidth, boxHeight);
 		shapeRenderer.end();
+
+		checkIfButtonIsClicked(positionXBox, positionYBox);
 	}
 
 	private void checkIfButtonIsClicked(float positionX, float positionY){
@@ -135,9 +135,9 @@ public class DescriptionScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		fonts.arial.dispose();
-		fonts.description.dispose();
+		super.dispose();
 		shapeRenderer.dispose();
+
 	}
 
 }
