@@ -67,7 +67,7 @@ public class DescriptionScreen implements Screen{
 		fonts.description.setColor(Color.BLACK);
 		fonts.description.draw(game.batch, description, positionXDescription, positionYDescription);
 		
-		if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionXBack, positionYBack, positionSecondXBack, positionSecondYBack, fonts.arial, menu)){
+		if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionXBack, positionYBack, positionSecondXBack, positionSecondYBack)){
 			this.dispose();
 			game.setScreen(new MainMenuScreen(game));
 		}
