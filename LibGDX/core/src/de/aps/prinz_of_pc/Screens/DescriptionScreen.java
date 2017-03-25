@@ -149,7 +149,7 @@ public class DescriptionScreen extends Games implements Screen{
 	public void dispose() {
 		super.dispose();
 		shapeRenderer.dispose();
-
+		background.dispose();
 	}
 
 }

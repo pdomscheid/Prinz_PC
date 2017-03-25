@@ -3,6 +3,7 @@ package de.aps.prinz_of_pc.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -128,6 +129,7 @@ public class GameScreen extends Games implements Screen{
 		float positionY = boxBottom;
 		
 		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(Color.DARK_GRAY);
 		shapeRenderer.rect(positionX, positionY, boxWidth, boxHeight);
 		shapeRenderer.end();
 	}

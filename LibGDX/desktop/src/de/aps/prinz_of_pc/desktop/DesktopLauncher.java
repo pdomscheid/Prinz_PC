@@ -14,6 +14,7 @@ public class DesktopLauncher {
 		config.resizable = false;
 		// Wenn der Spieler spielt
 		config.foregroundFPS = 60;
+		config.title = "Prinz PC";
 		new LwjglApplication(new PrinzGame(), config);
 	}
 }
