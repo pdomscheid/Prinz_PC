@@ -79,11 +79,19 @@ public class GameScreen implements Screen{
 								positionSecondXPause, positionXContinues, positionSecondXContinues, 
 								positionXClose, positionSecondXClose);
 		
+		drawFont(restart, positionXRestart, positionY, positionSecondXRestart);
+		drawFont(pause, positionXPause, positionY, positionSecondXPause);
+		drawFont(continues, positionXContinues, positionY, positionSecondXContinues);
+		drawFont(close, positionXClose, positionY, positionSecondXClose);	}
+	
+	private void drawFont(String str, float firstX, float firstY, float secondX){
+		if(checkHoverEffect(firstX, secondX)){
+			fonts.menue.setColor(Color.GRAY);
+			fonts.menue.draw(game.batch, str, firstX, firstY);
+		} else{
+			fonts.menue.draw(game.batch, str, firstX, firstY);
+		}
 		fonts.menue.setColor(Color.BLACK);
-		fonts.menue.draw(game.batch, restart, positionXRestart, positionY);
-		fonts.menue.draw(game.batch, pause, positionXPause, positionY);
-		fonts.menue.draw(game.batch, continues, positionXContinues, positionY);
-		fonts.menue.draw(game.batch, close, positionXClose, positionY);
 	}
 	
 	private void checkIfButtonIsPressed(float positionXRestart, float positionSecondXRestart,
@@ -104,8 +112,14 @@ public class GameScreen implements Screen{
 				game.setScreen(new MainMenuScreen(game));
 			}
 		}
-		
-		
+	}
+	
+	private boolean checkHoverEffect(float firstX, float secondX){
+		float boxTop = PrinzGame.HEIGHT;
+		if(ToolMethods.checkIfMouseIsInTheArea(firstX, boxBottom, secondX, boxTop)){
+			return true;
+		}
+		return false;
 	}
 	
 	private void drawMenuBox(){
