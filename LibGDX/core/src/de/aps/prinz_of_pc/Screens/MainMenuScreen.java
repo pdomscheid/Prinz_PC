@@ -13,22 +13,21 @@ import de.aps.prinz_of_pc.PrinzGame;
 import de.aps.prinz_of_pc.fonts.MyFonts;
 import de.aps.prinz_of_pc.tool_methods.ToolMethods;
 
-public class MainMenuScreen implements Screen{
+public class MainMenuScreen extends Games implements Screen{
 
-	PrinzGame game;
-	MyFonts fonts;
 	GlyphLayout layout;
-	Texture castle;
+	Texture background;
 	ShapeRenderer shapeRenderer;
 
 	final float boxWidth = 465;
 	final float boxHeight = 100;
 
 	public MainMenuScreen(PrinzGame game) {
+		super(game);
 		this.game = game;
 		this.fonts = new MyFonts();
 		this.layout = new GlyphLayout();
-		this.castle = new Texture("Castle.jpeg");
+		this.background = new Texture("MenueScreen.png");
 		shapeRenderer = new ShapeRenderer();
 	}
 
@@ -40,22 +39,33 @@ public class MainMenuScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		// Settings
+		float boxGapY = PrinzGame.HEIGHT * 0.1f;
 		int half = 2;
 		// Fonts
 		String startGame = "Spiel starten";
 		layout.setText(fonts.arial, startGame);
 		float positionXStartGame = PrinzGame.WIDTH / half - layout.width / half;
 		float positionYStartGame = PrinzGame.HEIGHT / half + PrinzGame.HEIGHT / 4;
+		float positionXSecondStartGame = positionXStartGame + layout.width;
+		float positionYBoxStartGame = positionYStartGame - boxGapY;
+		float positionSecondYBoxStartGame = positionYBoxStartGame + boxHeight;
+	
 
 		String description = "Anleitung";
 		layout.setText(fonts.arial, description);
 		float positionXDescription = PrinzGame.WIDTH / half - layout.width / half;
 		float positionYDescription = PrinzGame.HEIGHT / half;
+		float positionXSecondDescription = positionXDescription + layout.width;
+		float positionYBoxDescription = positionYDescription - boxGapY;
+		float positionSecondYBoxDescription = positionYBoxDescription + boxHeight;
 
 		String closeGame = "Spiel beenden";
 		layout.setText(fonts.arial, closeGame);
 		float positionXCloseGame = PrinzGame.WIDTH / half - layout.width / half;
 		float positionYCloseGame = PrinzGame.HEIGHT / half - PrinzGame.HEIGHT / 4;
+		float positionXSecondCloseGame = positionXCloseGame + layout.width;
+		float positionYBoxCloseGame = positionYCloseGame - boxGapY;
+		float positionSecondYBoxCloseGame = positionYBoxCloseGame + boxHeight;
 
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -65,10 +75,9 @@ public class MainMenuScreen implements Screen{
 		game.batch.begin();
 
 		//Draws buttons
-		fonts.arial.setColor(Color.BLACK);
-		fonts.arial.draw(game.batch, "Spiel starten", positionXStartGame, positionYStartGame);
-		fonts.arial.draw(game.batch, "Anleitung", positionXDescription, positionYDescription);
-		fonts.arial.draw(game.batch, "Spiel beenden", positionXCloseGame, positionYCloseGame);
+		drawFont(startGame, positionXStartGame, positionXSecondStartGame, positionYStartGame, positionYBoxStartGame, positionSecondYBoxStartGame, fonts.arial);
+		drawFont(description, positionXDescription, positionXSecondDescription, positionYDescription, positionYBoxDescription, positionSecondYBoxDescription, fonts.arial);
+		drawFont(closeGame, positionXCloseGame, positionXSecondCloseGame, positionYCloseGame, positionYBoxCloseGame, positionSecondYBoxCloseGame, fonts.arial);
 		game.batch.end();
 
 	}
@@ -86,8 +95,6 @@ public class MainMenuScreen implements Screen{
 		float positionYFirstBox = positionYStartGame - boxGapY;
 		float positionYSecondBox = positionYDescription - boxGapY;
 		float positionYThirdBox = positionYCloseGame - boxGapY;
-
-		checkIfOneButtonIsClicked(positionXBox, positionYFirstBox, positionYSecondBox, positionYThirdBox);
 		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.WHITE);
@@ -95,6 +102,9 @@ public class MainMenuScreen implements Screen{
 		shapeRenderer.rect(positionXBox, positionYSecondBox, boxWidth, boxHeight);
 		shapeRenderer.rect(positionXBox, positionYThirdBox, boxWidth, boxHeight);
 		shapeRenderer.end();
+		
+		checkIfOneButtonIsClicked(positionXBox, positionYFirstBox, positionYSecondBox, positionYThirdBox);
+
 	}
 
 	private void checkIfOneButtonIsClicked(float positionX, float positionYFirstBox, float positionYSecondBox, float positionYThirdBox){
@@ -144,7 +154,8 @@ public class MainMenuScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		super.dispose();
+		shapeRenderer.dispose();
 
 	}
 
