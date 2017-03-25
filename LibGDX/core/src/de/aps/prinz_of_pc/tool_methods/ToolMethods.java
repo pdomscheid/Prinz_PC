@@ -1,11 +1,10 @@
 package de.aps.prinz_of_pc.tool_methods;
 
 import com.badlogic.gdx.Gdx;
-
 import de.aps.prinz_of_pc.PrinzGame;
 
 public class ToolMethods {
-	
+
 	/**
 	 * Checks if the Mouse is between the parameters
 	 * @param firstX = Button down-left side

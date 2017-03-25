@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-
 import de.aps.prinz_of_pc.PrinzGame;
 import de.aps.prinz_of_pc.fonts.MyFonts;
 import de.aps.prinz_of_pc.tool_methods.ToolMethods;
