@@ -87,31 +87,33 @@ public class MainMenuScreen implements Screen{
 		float positionYSecondBox = positionYDescription - boxGapY;
 		float positionYThirdBox = positionYCloseGame - boxGapY;
 
+		checkIfOneButtonIsClicked(positionXBox, positionYFirstBox, positionYSecondBox, positionYThirdBox);
+		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.WHITE);
 		shapeRenderer.rect(positionXBox, positionYFirstBox, boxWidth, boxHeight);
 		shapeRenderer.rect(positionXBox, positionYSecondBox, boxWidth, boxHeight);
 		shapeRenderer.rect(positionXBox, positionYThirdBox, boxWidth, boxHeight);
 		shapeRenderer.end();
-
-		checkIfOneButtonIsClicked(positionXBox, positionYFirstBox, positionYSecondBox, positionYThirdBox);
 	}
 
 	private void checkIfOneButtonIsClicked(float positionX, float positionYFirstBox, float positionYSecondBox, float positionYThirdBox){
-		float positionSecondX = positionX + boxWidth;
-		float positionSecondYFirstBox = positionYFirstBox + boxHeight;
-		float positionSecondYSecondBox = positionYSecondBox + boxHeight;
-		float positionSecondYThirdBox = positionYThirdBox + boxHeight;
+		if(Gdx.input.isButtonPressed(Buttons.LEFT)){
+			float positionSecondX = positionX + boxWidth;
+			float positionSecondYFirstBox = positionYFirstBox + boxHeight;
+			float positionSecondYSecondBox = positionYSecondBox + boxHeight;
+			float positionSecondYThirdBox = positionYThirdBox + boxHeight;
 
-		if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionX, positionYFirstBox, positionSecondX, positionSecondYFirstBox)){
-			this.dispose();
-			game.setScreen(new GameScreen(game));
-		} 
-		else if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionX, positionYSecondBox, positionSecondX, positionSecondYSecondBox)){
-			this.dispose();
-			game.setScreen(new DescriptionScreen(game));
-		} else if(Gdx.input.isButtonPressed(Buttons.LEFT) && ToolMethods.checkIfMouseIsInTheArea(positionX, positionYThirdBox, positionSecondX, positionSecondYThirdBox)){
-			Gdx.app.exit();
+			if(ToolMethods.checkIfMouseIsInTheArea(positionX, positionYFirstBox, positionSecondX, positionSecondYFirstBox)){
+				this.dispose();
+				game.setScreen(new GameScreen(game));
+			} 
+			else if(ToolMethods.checkIfMouseIsInTheArea(positionX, positionYSecondBox, positionSecondX, positionSecondYSecondBox)){
+				this.dispose();
+				game.setScreen(new DescriptionScreen(game));
+			} else if(ToolMethods.checkIfMouseIsInTheArea(positionX, positionYThirdBox, positionSecondX, positionSecondYThirdBox)){
+				Gdx.app.exit();
+			}
 		}
 	}
 

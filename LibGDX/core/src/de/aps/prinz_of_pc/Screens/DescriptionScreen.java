@@ -91,12 +91,12 @@ public class DescriptionScreen implements Screen{
 		float positionXBox = positionX - boxGapX;
 		float positionYBox = positionY - boxGapY;
 
+		checkIfButtonIsClicked(positionXBox, positionYBox);
+		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.WHITE);
 		shapeRenderer.rect(positionXBox, positionYBox, boxWidth, boxHeight);
 		shapeRenderer.end();
-
-		checkIfButtonIsClicked(positionXBox, positionYBox);
 	}
 
 	private void checkIfButtonIsClicked(float positionX, float positionY){
