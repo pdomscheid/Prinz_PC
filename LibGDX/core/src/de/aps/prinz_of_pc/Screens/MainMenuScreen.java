@@ -49,25 +49,16 @@ public class MainMenuScreen implements Screen{
 		layout.setText(fonts.arial, startGame);
 		float positionXStartGame = PrinzGame.WIDTH / half - layout.width / half;
 		float positionYStartGame = PrinzGame.HEIGHT / half + PrinzGame.HEIGHT / 4;
-		float positionSecondXStartGame = positionXStartGame + layout.width;
-		float positionSecondYStartGame = positionYStartGame + layout.height;
 		
 		String description = "Anleitung";
 		layout.setText(fonts.arial, description);
 		float positionXDescription = PrinzGame.WIDTH / half - layout.width / half;
 		float positionYDescription = PrinzGame.HEIGHT / half;
-		float positionSecondXDescription = positionXDescription + layout.width;;
-		float positionSecondYDescription = positionYDescription + layout.height;
 		
 		String closeGame = "Spiel beenden";
 		layout.setText(fonts.arial, closeGame);
 		float positionXCloseGame = PrinzGame.WIDTH / half - layout.width / half;
 		float positionYCloseGame = PrinzGame.HEIGHT / half - PrinzGame.HEIGHT / 4;
-		float positionSecondXCloseGame = positionXCloseGame + layout.width;;
-		float positionSecondYCloseGame = positionYCloseGame + layout.height;
-		
-	
-
 		
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -84,7 +75,13 @@ public class MainMenuScreen implements Screen{
 		game.batch.end();
 		
 	}
-	
+	/**
+	 * Draws all Boxes 
+	 * @param positionXStartGame = Biggest font
+	 * @param positionYStartGame = First menu button
+	 * @param positionYDescription = Second menu button
+	 * @param positionYCloseGame = Third menu button
+	 */
 	private void drawBoxes(float positionXStartGame, float positionYStartGame, float positionYDescription, float positionYCloseGame){
 		float boxGapX = PrinzGame.WIDTH * 0.05f;
 		float boxGapY = PrinzGame.HEIGHT * 0.1f;
