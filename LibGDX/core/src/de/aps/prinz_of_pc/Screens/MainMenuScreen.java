@@ -13,6 +13,11 @@ import de.aps.prinz_of_pc.PrinzGame;
 import de.aps.prinz_of_pc.fonts.MyFonts;
 import de.aps.prinz_of_pc.tool_methods.ToolMethods;
 
+/**
+ * Startbildschirm Programm
+ * @author patrickdomscheid
+ *
+ */
 public class MainMenuScreen extends Games implements Screen{
 
 	GlyphLayout layout;
@@ -41,7 +46,7 @@ public class MainMenuScreen extends Games implements Screen{
 		// Settings
 		float boxGapY = PrinzGame.HEIGHT * 0.1f;
 		int half = 2;
-		// Fonts
+		// Set the Positions of the Fonts
 		String startGame = "Spiel starten";
 		layout.setText(fonts.arial, startGame);
 		float positionXStartGame = PrinzGame.WIDTH / half - layout.width / half;
@@ -50,7 +55,6 @@ public class MainMenuScreen extends Games implements Screen{
 		float positionYBoxStartGame = positionYStartGame - boxGapY;
 		float positionSecondYBoxStartGame = positionYBoxStartGame + boxHeight;
 	
-
 		String description = "Anleitung";
 		layout.setText(fonts.arial, description);
 		float positionXDescription = PrinzGame.WIDTH / half - layout.width / half;
@@ -67,14 +71,14 @@ public class MainMenuScreen extends Games implements Screen{
 		float positionYBoxCloseGame = positionYCloseGame - boxGapY;
 		float positionSecondYBoxCloseGame = positionYBoxCloseGame + boxHeight;
 
+		// Here begins the drawing od the screen
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		drawBoxes(positionXStartGame, positionYStartGame, positionYDescription, positionYCloseGame);
-
-		game.batch.begin();
-
+		
+		drawBoxes(positionXStartGame, positionYBoxStartGame, positionYBoxDescription, positionYBoxCloseGame);
+		
 		//Draws buttons
+		game.batch.begin();
 		drawFont(startGame, positionXStartGame, positionXSecondStartGame, positionYStartGame, positionYBoxStartGame, positionSecondYBoxStartGame, fonts.arial);
 		drawFont(description, positionXDescription, positionXSecondDescription, positionYDescription, positionYBoxDescription, positionSecondYBoxDescription, fonts.arial);
 		drawFont(closeGame, positionXCloseGame, positionXSecondCloseGame, positionYCloseGame, positionYBoxCloseGame, positionSecondYBoxCloseGame, fonts.arial);
@@ -88,13 +92,9 @@ public class MainMenuScreen extends Games implements Screen{
 	 * @param positionYDescription = Second menu button
 	 * @param positionYCloseGame = Third menu button
 	 */
-	private void drawBoxes(float positionXStartGame, float positionYStartGame, float positionYDescription, float positionYCloseGame){
+	private void drawBoxes(float positionXStartGame, float positionYFirstBox, float positionYSecondBox, float positionYThirdBox){
 		float boxGapX = PrinzGame.WIDTH * 0.05f;
-		float boxGapY = PrinzGame.HEIGHT * 0.1f;
 		float positionXBox = positionXStartGame - boxGapX;
-		float positionYFirstBox = positionYStartGame - boxGapY;
-		float positionYSecondBox = positionYDescription - boxGapY;
-		float positionYThirdBox = positionYCloseGame - boxGapY;
 		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.WHITE);
@@ -107,6 +107,13 @@ public class MainMenuScreen extends Games implements Screen{
 
 	}
 
+	/**
+	 * If one button is clicked, the method will react 
+	 * @param positionX
+	 * @param positionYFirstBox
+	 * @param positionYSecondBox
+	 * @param positionYThirdBox
+	 */
 	private void checkIfOneButtonIsClicked(float positionX, float positionYFirstBox, float positionYSecondBox, float positionYThirdBox){
 		if(Gdx.input.isButtonPressed(Buttons.LEFT)){
 			float positionSecondX = positionX + boxWidth;
