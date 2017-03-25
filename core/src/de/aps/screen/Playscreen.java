@@ -50,7 +50,7 @@ public class Playscreen implements Screen {
     playerSprite = new Sprite(img);
     
     player = new Player(playerSprite, (TiledMapTileLayer) tiledMap.getLayers().get("blocked"));
-    player.setPosition(20 * player.getCollisionLayer().getTileWidth(), (player.getCollisionLayer().getHeight() - 17) * player.getCollisionLayer().getTileHeight());
+    player.setPosition(52 * player.getCollisionLayer().getTileWidth(), (player.getCollisionLayer().getHeight() - 46) * player.getCollisionLayer().getTileHeight());
     
     
      Gdx.input.setInputProcessor(player);
@@ -87,28 +87,25 @@ public class Playscreen implements Screen {
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void hide() {
-		dispose();
-		tiledMap.dispose();
-		renderer.dispose();
-		player.getTexture().dispose();
+		
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		dispose();
+		tiledMap.dispose();
+		renderer.dispose();
+		player.getTexture().dispose();
 	}
 
 }

@@ -119,7 +119,7 @@ public class Player extends Sprite implements InputProcessor{
 	private boolean isCellBlocked(float x, float y) {
 		Cell cell = collisionLayer.getCell((int) ( x / collisionLayer.getTileWidth()), (int)(y/collisionLayer.getTileHeight()));
 		
-		return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("1");
+		return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
 	}
 	
 	public boolean collidesRight() {
