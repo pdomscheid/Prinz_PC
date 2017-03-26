@@ -11,6 +11,10 @@ public class DesktopLauncher {
 		config.title = "Prince of PC";
 	      config.width = 1280;
 	      config.height = 720;
+	      //Fenstergroeße nicht veränderbar
+	      config.resizable = false; 
+	      //FPS einstellung
+	      config.foregroundFPS = 60;
 		new LwjglApplication(new PrinceGame(), config);
 
 	}
