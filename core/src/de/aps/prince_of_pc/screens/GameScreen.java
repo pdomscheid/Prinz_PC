@@ -64,6 +64,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	int [] dialogNPCsTextField=new int [12];
 	Sound sound;
 	boolean soundPause = false;
+	boolean startedDialog = false;
 
 	public GameScreen(PrinceGame game){
 		super(game);
@@ -129,7 +130,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		camera.update();
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
-		if(!pause){
+		if(!pause && !startedDialog){
 			if(soundPause){
 				sound.play();
 				soundPause = false;
@@ -168,7 +169,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 					// lastState = "down";
 				}
 			}
-		} else{
+		} else if(pause){
 			sound.pause();
 			soundPause = true;
 		}
@@ -185,6 +186,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	}
 
 	private void startDialog() {
+		startedDialog = true;
 		fonts.description.setColor(Color.WHITE);
 		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 131 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[1]==true) {
