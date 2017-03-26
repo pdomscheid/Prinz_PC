@@ -84,6 +84,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	public int[][] arr = new int[200][200];
 	boolean [] dialogNPCs=new boolean[12];
 	int [] dialogNPCsTextField=new int [12];
+	Sound sound;
 
 	private String lastState = "down";
 
@@ -101,7 +102,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
 		//Sound
-		Sound sound = Gdx.audio.newSound(Gdx.files.internal("bilders-sound/02-the-superstar-saga.mp3"));
+		sound = Gdx.audio.newSound(Gdx.files.internal("bilders-sound/02-the-superstar-saga.mp3"));
 
 		// Spielercharacter erstellen
 		playerSprite = new Sprite(character);
@@ -109,8 +110,8 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				Gdx.graphics.getWidth() * 1f, Gdx.graphics.getHeight() * 4f);
 
 		Gdx.input.setInputProcessor(this);
-		//sound.play(1.0f);
-		//sound.loop();
+		sound.play(1.0f);
+		sound.loop();
 		updateMap();
 
 		try {
@@ -557,7 +558,9 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	public void dispose() {
 		super.dispose();
 		shapeRenderer.dispose();
-
+		tiledMap.dispose();
+		character.dispose();
+		sound.dispose();
 	}
 
 	@Override
