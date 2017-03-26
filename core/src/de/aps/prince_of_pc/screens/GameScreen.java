@@ -14,51 +14,30 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
-
-import javax.sound.sampled.Line;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
-
 import de.aps.prince_of_pc.Player;
 import de.aps.prince_of_pc.PrinceGame;
 import de.aps.prince_of_pc.tool_methods.ToolMethods;
-import de.aps.prinz_of_pc.fonts.MyFonts;
 
 public class GameScreen extends Games implements Screen, InputProcessor{
 
@@ -75,7 +54,6 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	//Game Settings
 	Player player;
 
-	Texture img;
 	TiledMap tiledMap;
 	OrthographicCamera camera;
 	TiledMapRenderer tiledMapRenderer;
@@ -86,8 +64,6 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	int [] dialogNPCsTextField=new int [12];
 	Sound sound;
 	boolean soundPause = false;
-
-	private String lastState = "down";
 
 	public GameScreen(PrinceGame game){
 		super(game);
@@ -118,7 +94,6 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		try {
 			getValueOfLayerBlocked();
 		} catch (XPathExpressionException | ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Fehler");
 			System.exit(0);
 		}
