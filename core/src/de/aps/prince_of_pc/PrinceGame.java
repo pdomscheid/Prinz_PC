@@ -31,17 +31,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+
+import de.aps.prinz_of_pc.fonts.MyFonts;
 
 public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 
@@ -54,9 +60,12 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	private SpriteBatch batch;
 	private Texture character;
 	private Sprite playerSprite;
-	private Vector3 cameraPosition;
+	MyFonts font;
 	public int[][] arr = new int[200][200];
-
+	ShapeRenderer shapeRenderer;
+	boolean [] dialogNPCs=new boolean[12];
+	int [] dialogNPCsTextField=new int [12];
+	
 	private String lastState = "down";
 
 	@Override
@@ -65,15 +74,19 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		// Spielercharacter
 		batch = new SpriteBatch();
 		// Verschiedene Texturen f�r Richtungen
-		character = new Texture(Gdx.files.internal("C:/Users/AsimB/OneDrive/Dokumente/bilderTMX/chardown.PNG"));
+		character = new Texture(Gdx.files.internal("char_down.PNG"));
 
 		// Map
 		tiledMap = new TmxMapLoader()
-				.load("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/probemap.tmx");
+				.load("probemap.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		
+		//Font
+		font=new MyFonts();
+		shapeRenderer=new ShapeRenderer();
+		
 		//Sound
-		Sound sound = Gdx.audio.newSound(Gdx.files.internal("C:/Users/AsimB/Downloads/02-the-superstar-saga.mp3"));
+		Sound sound = Gdx.audio.newSound(Gdx.files.internal("bilders-sound/02-the-superstar-saga.mp3"));
 
 		// Spielercharacter erstellen
 		playerSprite = new Sprite(character);
@@ -84,8 +97,17 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		sound.play(1.0f);
 		sound.loop();
 		updateMap();
+		
+		try {
+			getValueOfLayerBlocked();
+		} catch (XPathExpressionException | ParserConfigurationException | SAXException | IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Fehler");
+			System.exit(0);
+		}
+		
 		printArray();
-
+		
 		// Kamera
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -108,7 +130,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		player.update();
-
+		colision();
+		
 		
 		// System.out.println("Cam-Pos: "+camera.position);
 		// Kamera u. Map rendern
@@ -152,9 +175,57 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		}
 
 		batch.begin();
+		
+		
+		startDialog();
 		player.draw(batch);
 		batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.end();
+	}
+
+	private void startDialog() {
+		font.description.setColor(Color.WHITE);
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 131 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[1]==true) {
+			System.err.println("Dialog möglich!");
+			dialogWithFeminist();
+		}else if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 132 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[1]==true) {
+			
+		}
+		
+	}
+
+	private void dialogWithFeminist() {
+		drawTextBox();
+		dialogNPCs[1]=true;
+		
+		switch (dialogNPCsTextField[1]) {
+		case 0:
+			String dialog0="Feministin Felicitas: Das haette dir woh so gepasst. Aber ich werde mir die \n"
+					+ "Unterdrückung des Patriarchats nicht weiter gefallen lassen du Chauvinist.";
+			
+			font.description.draw(batch, dialog0, 100, 190);
+			dialogNPCsTextField[1]=0;
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		
+		
+	}
+	
+	private void drawTextBox(){
+		batch.end();
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(Color.BLACK);
+		shapeRenderer.rect(80, 0, 1120, 200);
+		shapeRenderer.end();
+		batch.begin();
 	}
 
 	@Override
@@ -208,16 +279,21 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	public void getValueOfLayerBlocked()
 			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
+		
+		/**
+		 * Nur nötig bei aktualissiierung der map
+		 */
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		Document doc = builder
-				.parse(new File("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/probemap.tmx"));
+		System.out.println("angelegt vorher");
+		Document doc = builder.parse(new File("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/probemap.tmx"));
+		System.out.println("angelegt");
 		doc.getDocumentElement().normalize();
 		NodeList nodeList = doc.getElementsByTagName("layer");
-		int j;
 		// System.out.println("ukupno:"+nodeList.getLength());
 
-		PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter("aktmap.txt", "UTF-8");
+		
 		for (int i = 0; i < nodeList.getLength(); i++) {
 
 			Node nNode = nodeList.item(i);
@@ -246,10 +322,12 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 
 						updateMap();
 
-						// if(i2==1){
-						// fillArray(lines);
-						// writer.println(an2.getFirstChild().getTextContent());
-						// }
+						 if(i2==1){
+//						 fillArray(lines);
+						 writer.println(an2.getFirstChild().getTextContent());
+						 writer.close();
+						
+						 }
 
 
 
@@ -269,7 +347,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			for (int j = 0; j < arr[i].length; j++) {
 				System.out.print(arr[i][j] + ", ");
 			}
-			System.out.println("|||");
+			//System.out.println("|||");
 		}
 
 	}
@@ -297,7 +375,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		List<String> lines = null;
 		try {
 			lines = Files.readAllLines(
-					Paths.get("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/desktop/map.txt"),
+					Paths.get("../desktop/aktmap.txt"),
 					StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			System.err.println("No such file!");
@@ -311,9 +389,9 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 
 			for (int k2 = 0, zahl = 0; k2 < lines.get(k).split(",").length; k2++) {
 				if (lines.get(k).split(",").length > 199) {
-					System.out.println(lines.get(k).split(",").length);
-					if (lines.get(k).split(",")[k2].equals("193") || lines.get(k).split(",")[k2].equals("0")) {
-						System.out.print("WERT: " + lines.get(k).split(",")[k2] + ", ");
+					//System.out.println(lines.get(k).split(",").length);
+					if (lines.get(k).split(",")[k2].equals("193") || lines.get(k).split(",")[k2].equals("0") || lines.get(k).split(",")[k2].equals("131")) {
+						//System.out.print("WERT: " + lines.get(k).split(",")[k2] + ", ");
 
 						arr[indexFuerArray][zahl] = Integer.parseInt(lines.get(k).split(",")[k2]);
 						zahl++;
@@ -337,22 +415,22 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	 * y ist x und x ist y
 	 * Kollisionermittlung
 	 */
-//	public void colision() {
-//		// System.out.println(camera.position);
-//		System.out.println("x: " + ((int) camera.position.x / 16) + ", y: " + (((int) camera.position.y / 16 - 199) * (-1)));
-//
-//		// collision
-//		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 193) {
-//			// System.exit(0);
-//			System.err.println("Collision");
-//		}
-//
-//	}
+	public void colision() {
+		// System.out.println(camera.position);
+		System.out.println("x: " + ((int) camera.position.x / 16) + ", y: " + (((int) camera.position.y / 16 - 199) * (-1)));
+
+		// collision
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 193) {
+			// System.exit(0);
+			System.err.println("Collision");
+		}
+
+	}
 
 	public boolean collisionleft() {
 
 		// collision left
-		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) - 1] == 193) {
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)-1] == 193) {
 			// System.exit(0);
 			System.err.println("Collision left");
 			return true;
@@ -364,7 +442,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	public boolean collisionright() {
 
 		// collision right
-		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) + 1] == 193) {
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) +1] == 193 ||
+			arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) +2] == 193) {
 			// System.exit(0);
 			System.err.println("Collision right");
 			return true;
@@ -376,7 +455,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	public boolean collisionup() {
 
 		// collision up
-		if (arr[(((int) camera.position.y / 16 - 199) * (-1)) - 1][((int) camera.position.x / 16)] == 193) {
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1)) - 1][((int) camera.position.x / 16)] == 193 ||
+				arr[(((int) camera.position.y / 16 - 199) * (-1)) - 1][((int) camera.position.x / 16)+1] == 193) {
 			System.err.println("Collision up");
 			return true;
 		}
@@ -387,7 +467,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	public boolean collisiondown() {
 
 		// collision down
-		if (arr[(((int) camera.position.y / 16 - 199) * (-1)) + 1][((int) camera.position.x / 16)] == 193) {
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1)) + 1][((int) camera.position.x / 16)] == 193 ||
+				arr[(((int) camera.position.y / 16 - 199) * (-1)) + 1][((int) camera.position.x / 16)+1] == 193) {
 			// System.exit(0);
 			System.err.println("Collision down");
 			return true;
