@@ -77,8 +77,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		character = new Texture(Gdx.files.internal("char_down.PNG"));
 
 		// Map
-		tiledMap = new TmxMapLoader()
-				.load("probemap.tmx");
+		tiledMap = new TmxMapLoader().load("probemap.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		
 		//Font
@@ -86,7 +85,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		shapeRenderer=new ShapeRenderer();
 		
 		//Sound
-		Sound sound = Gdx.audio.newSound(Gdx.files.internal("bilders-sound/02-the-superstar-saga.mp3"));
+		Sound sound = Gdx.audio.newSound(Gdx.files.internal("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/bilders-sound/02-the-superstar-saga.mp3"));
 
 		// Spielercharacter erstellen
 		playerSprite = new Sprite(character);
@@ -189,9 +188,10 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 				|| dialogNPCs[1]==true) {
 			System.err.println("Dialog möglich!");
 			dialogWithFeminist();
-		}else if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 132 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
-				|| dialogNPCs[1]==true) {
-			
+		}else if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 130 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[0]==true) {
+			System.err.println("Dialog mit mark möglich!");
+			dialogWithMark();
 		}
 		
 	}
@@ -199,22 +199,117 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	private void dialogWithFeminist() {
 		drawTextBox();
 		dialogNPCs[1]=true;
-		
+		String dialog0;
 		switch (dialogNPCsTextField[1]) {
 		case 0:
-			String dialog0="Feministin Felicitas: Das haette dir woh so gepasst. Aber ich werde mir die \n"
-					+ "Unterdrückung des Patriarchats nicht weiter gefallen lassen du Chauvinist.";
+			dialog0="Feministin Felicitas: Das haette dir wohl so gepasst. Aber ich werde mir die \n"
+					+ "Unterdrueckung des Patriarchats nicht weiter gefallen lassen du Chauvinist.";
 			
 			font.description.draw(batch, dialog0, 100, 190);
-			dialogNPCsTextField[1]=0;
-			
-			break;
 
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				
+				dialogNPCsTextField[1]=1;
+			}
+			break;
+		case 1:
+			dialog0="Prince Gaylord: Ich suche meinen Prinzen.";
+			font.description.draw(batch, dialog0, 100, 190);
+
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				
+				dialogNPCsTextField[1]=2;
+			}
+			break;
+		case 2:
+			dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie süß. Bevor ich dir weiter helfe erkläre \n"
+					+ "mir doch bitte was Manspredding ist?\n"
+					+ "a) Die Ausdehnung von Männern in klassisch weiblichen Berufen\n"
+					+ "b) Das breitbeinige sitzen von Männern\n"
+					+ "c) Eine Maskulinistische Bewegung zur Emanzipation von Männern";
+			font.description.draw(batch, dialog0, 100, 190);
+
+			if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {				
+				dialogNPCsTextField[1]=4;
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				
+				dialogNPCsTextField[1]=5;
+			}
+			break;	
+		case 3:
+			dialog0="Emanzipation heißt nicht dem Mann »gleichwertig« werden zu wollen, sondern unsere Stärken zu \nerkennen"
+					+ "und sie zu leben, aber auch die Schwächen der Männer zu erkennen und sie zu akzeptieren. \n"
+					+ "Nur wenn uns das gelingt, werden wir wahrhaft emanzipiert sein.";
+			font.description.draw(batch, dialog0, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[1]=3;
+				dialogNPCs[1]=false;
+			}
+			break;
+		case 4:
+			dialog0="Hmm wenn ich es mir recht überlege habe ich gestern eine mysteriöse Gestalt gesehen, die \nsich in Richtung"
+					+ " Sueden davon machte. Schau dich doch im Dorf der Toleranz um. \nEin wunderbarer Ort…. *säuftz*";
+			font.description.draw(batch, dialog0, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[1]=false;
+				dialogNPCsTextField[1]=3;
+			}
+			break;
+		case 5:
+			dialog0="Du Schwein du solltest dich direkt auf den Weg nach Osten ins Machodorf \nmachen wo du hingehoerst.";
+			font.description.draw(batch, dialog0, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[1]=0;
+				
+			}
+			
 		default:
 			break;
 		}
 		
+		if(dialogNPCs[1]==false){
+			dialogNPCsTextField[1]=3;
+		}
 		
+	}
+	
+	private void dialogWithMark(){
+		
+		drawTextBox();
+		dialogNPCs[0]=true;
+		String dialog0;
+		switch (dialogNPCsTextField[0]) {
+		case 0:
+			dialog0="Mysterioeser Typ: Hey Prinz was ist los?";
+			
+			font.description.draw(batch, dialog0, 100, 190);
+
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				
+				dialogNPCsTextField[0]=1;
+			}
+			break;
+		case 1:
+			dialog0="Prince Gaylord: ...";
+			font.description.draw(batch, dialog0, 100, 190);
+
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				
+				dialogNPCsTextField[0]=2;
+			}
+			break;
+		case 2:
+			dialog0="Mysterioeser Typ: Ach du suchst deinen Freund? Es tut mir leid ich habe nichts gesehen,\naber gehe doch nach Südosten zur Feministin Felicias sie kann dir sicher weiterhelfen.";
+			font.description.draw(batch, dialog0, 100, 190);
+
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[0]=false;
+				dialogNPCsTextField[0]=2;
+			}
+			break;	
+		default:
+			break;
+		}
 		
 		
 	}
@@ -326,6 +421,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 //						 fillArray(lines);
 						 writer.println(an2.getFirstChild().getTextContent());
 						 writer.close();
+						 
 						
 						 }
 
@@ -390,7 +486,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			for (int k2 = 0, zahl = 0; k2 < lines.get(k).split(",").length; k2++) {
 				if (lines.get(k).split(",").length > 199) {
 					//System.out.println(lines.get(k).split(",").length);
-					if (lines.get(k).split(",")[k2].equals("193") || lines.get(k).split(",")[k2].equals("0") || lines.get(k).split(",")[k2].equals("131")) {
+					if (lines.get(k).split(",")[k2].equals("193") || lines.get(k).split(",")[k2].equals("130") || lines.get(k).split(",")[k2].equals("0") || lines.get(k).split(",")[k2].equals("131")) {
 						//System.out.print("WERT: " + lines.get(k).split(",")[k2] + ", ");
 
 						arr[indexFuerArray][zahl] = Integer.parseInt(lines.get(k).split(",")[k2]);

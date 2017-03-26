@@ -9,25 +9,25 @@
   </tile>
  </tileset>
  <tileset firstgid="8065" name="gebäude" tilewidth="16" tileheight="16" tilecount="2756" columns="53">
-  <image source="bilders-sound/m53_67ae6k1j1.png" width="848" height="847"/>
+  <image source="m53_67ae6k1j1.png" width="848" height="847"/>
  </tileset>
  <tileset firstgid="10821" name="Gebäude stadt" tilewidth="16" tileheight="16" tilecount="14758" columns="94">
-  <image source="bilders-sound/tileset-pokemon_dawn.png" width="1504" height="2519"/>
+  <image source="tileset-pokemon_dawn.png" width="1504" height="2519"/>
   <terraintypes>
    <terrain name="fluss" tile="-1"/>
   </terraintypes>
  </tileset>
  <tileset firstgid="25579" name="prinzen" tilewidth="16" tileheight="16" tilecount="696" columns="29">
-  <image source="bilders-sound/prinzboesewicht.png" width="479" height="384"/>
+  <image source="prinzboesewicht.png" width="479" height="384"/>
  </tileset>
  <tileset firstgid="26275" name="base_landscape" tilewidth="16" tileheight="16" tilecount="468" columns="18">
-  <image source="bilders-sound/base_landscape.png" width="288" height="416"/>
+  <image source="base_landscape.png" width="288" height="416"/>
  </tileset>
  <tileset firstgid="26743" name="gym" tilewidth="16" tileheight="16" tilecount="3" columns="3">
-  <image source="bilders-sound/gym.PNG" width="50" height="19"/>
+  <image source="gym.PNG" width="50" height="19"/>
  </tileset>
  <tileset firstgid="26746" name="junge" tilewidth="16" tileheight="16" tilecount="48" columns="6">
-  <image source="bilders-sound/135_adam_by_telles0808.png" width="96" height="128"/>
+  <image source="135_adam_by_telles0808.png" width="96" height="128"/>
  </tileset>
  <layer name="blocked" width="200" height="200">
   <data encoding="csv">

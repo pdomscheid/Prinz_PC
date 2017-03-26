@@ -13,7 +13,7 @@ public class MyFonts{
 
 	public MyFonts(){
 		// Arial
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Arial.ttf"));
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/Arial.ttf"));
 
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 64;
