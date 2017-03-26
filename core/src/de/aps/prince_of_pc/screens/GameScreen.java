@@ -277,7 +277,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		layout.setText(fonts.menue, continues);
 		float positionSecondXContinues = positionXContinues + layout.width;
 
-		String close = "Spiel beenden";
+		String close = "Beenden";
 		float positionXClose = positionXContinues + layout.width + gap;
 		layout.setText(fonts.menue, close);
 		float positionSecondXClose = positionXClose + layout.width;
