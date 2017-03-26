@@ -286,7 +286,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		System.out.println("angelegt vorher");
-		Document doc = builder.parse(new File("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/probemap.tmx"));
+		Document doc = builder.parse(new File("/Users/patrickdomscheid/git/PrinzPC/core/assets/probemap.tmx"));
 		System.out.println("angelegt");
 		doc.getDocumentElement().normalize();
 		NodeList nodeList = doc.getElementsByTagName("layer");
