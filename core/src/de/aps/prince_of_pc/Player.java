@@ -11,6 +11,8 @@ public class Player extends Sprite {
 	
 	private float xPos = Gdx.graphics.getWidth()/2;
 	private float yPos = Gdx.graphics.getHeight()/2;
+	float oldX;
+	float oldY;
 	
 	private Vector2 movement = new Vector2(0,0);
     private Texture character;
@@ -44,8 +46,7 @@ public class Player extends Sprite {
 		boolean collisionX = false;
 		boolean collisionY = false;
 		
-		float oldX = getxPos();
-		float oldY = getyPos();
+		
 		
 		if(getxPos() <  oldX) // going left
 			collisionX = collidesLeft();
@@ -67,9 +68,10 @@ public class Player extends Sprite {
 					setY(oldY);
 
 				}
-				
-				System.out.println(collisionX + " " + collisionY);
-				System.out.println(xPos + "  " + yPos);
+				oldX = getxPos();
+				oldY = getyPos();
+//				System.out.println(collisionX + " " + collisionY);
+//				System.out.println(xPos + "  " + yPos);
 		
 	}
 	
@@ -81,31 +83,37 @@ public class Player extends Sprite {
 	
 	public boolean collidesRight() {
 		for(float step = 0; step < getHeight(); step += collisionLayer.getTileHeight() / 2)
-			if(isCellBlocked(getX() + getWidth(), getY() + step))
+			if(!isCellBlocked(getX() + getWidth(), getY() + step))
 				return true;
+		System.out.println("rechts frei");
 		return false;
 	}
 	
 	public boolean collidesLeft() {
 		for(float step = 0; step < getHeight(); step += collisionLayer.getTileHeight() / 2)
-			if(isCellBlocked(getX(), getY() + step))
+			if(!isCellBlocked(getX(), getY() + step))
 				return true;
+		System.out.println("links frei");
 		return false;
 	}
 
 	public boolean collidesTop() {
 		for(float step = 0; step < getWidth(); step += collisionLayer.getTileWidth() / 2)
-			if(isCellBlocked(getX() + step, getY() + getHeight()))
+			if(!isCellBlocked(getX() + step, getY() + getHeight()))
 				return true;
+		System.out.println("oben frei");
 		return false;
 
 	}
 
 	public boolean collidesBottom() {
 		for(float step = 0; step < getWidth(); step += collisionLayer.getTileWidth() / 2)
-			if(isCellBlocked(getX() + step, getY()))
+			if(!isCellBlocked(getX() + step, getY()))
 				return true;
+		System.out.println("unten frei");
 		return false;
 	}
+	
+	
 
 }
