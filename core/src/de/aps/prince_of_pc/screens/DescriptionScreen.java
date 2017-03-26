@@ -80,7 +80,7 @@ public class DescriptionScreen extends Games implements Screen{
 				+ "Dialoge weiterklicken: Leertaste\n"
 				+ "Dialog beginnen: Leertaste";
 		layout.setText(fonts.description, description);
-		float positionXDescription = PrinceGame.WIDTH / 2 - layout.width / 2;
+		float positionXDescription = PrinceGame.WIDTH / 2 - layout.width / 2 - 100;
 		float positionYDescription = PrinceGame.HEIGHT / 2 + layout.height / 2;
 
 		fonts.description.setColor(Color.WHITE);

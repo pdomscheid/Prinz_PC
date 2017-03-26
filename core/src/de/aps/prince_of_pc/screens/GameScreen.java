@@ -85,6 +85,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	boolean [] dialogNPCs=new boolean[12];
 	int [] dialogNPCsTextField=new int [12];
 	Sound sound;
+	boolean soundPause = false;
 
 	private String lastState = "down";
 
@@ -146,61 +147,68 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 
 		player.update();
 		colision();
-		
-		
+
+
 		// System.out.println("Cam-Pos: "+camera.position);
 		// Kamera u. Map rendern
 		camera.update();
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
-
-		// Characterposition
-		player.setxPos(Gdx.graphics.getWidth() / 2);
-		player.setyPos(Gdx.graphics.getHeight() / 2);
-		player.setPosition(player.getxPos(), player.getyPos());
-
-		// Movement
-		if (!collisionleft()) {
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-				camera.translate(-2f, 0);
-				// lastState = "left";
+		if(!pause){
+			if(soundPause){
+				sound.play();
+				soundPause = false;
 			}
-		}
+			// Characterposition
+			player.setxPos(Gdx.graphics.getWidth() / 2);
+			player.setyPos(Gdx.graphics.getHeight() / 2);
+			player.setPosition(player.getxPos(), player.getyPos());
 
-		if (!collisionright()) {
-			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				// player.translate(2f,0);
-				camera.translate(2f, 0);
-				// lastState = "right";
+			// Movement
+			if (!collisionleft()) {
+				if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+					camera.translate(-2f, 0);
+					// lastState = "left";
+				}
 			}
-		}
 
-		if (!collisionup()) {
-			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				camera.translate(0, 2f);
-				// lastState = "up";
+			if (!collisionright()) {
+				if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+					// player.translate(2f,0);
+					camera.translate(2f, 0);
+					// lastState = "right";
+				}
 			}
-		}
 
-		if (!collisiondown()) {
-			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				camera.translate(0, -2f);
-				// lastState = "down";
+			if (!collisionup()) {
+				if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+					camera.translate(0, 2f);
+					// lastState = "up";
+				}
 			}
-		}
 
+			if (!collisiondown()) {
+				if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+					camera.translate(0, -2f);
+					// lastState = "down";
+				}
+			}
+		} else{
+			sound.pause();
+			soundPause = true;
+		}
 		drawMenuBox();
 		game.batch.begin();
 		createMenue();
-		
+
 		startDialog();
-		
+
 		player.draw(game.batch);
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		game.batch.end();
 
 	}
-	
+
 	private void startDialog() {
 		fonts.description.setColor(Color.WHITE);
 		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 131 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
@@ -209,34 +217,34 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			dialogWithFeminist();
 		}else if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 132 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[1]==true) {
-			
+
 		}
-		
+
 	}
 
 	private void dialogWithFeminist() {
 		drawTextBox();
 		dialogNPCs[1]=true;
-		
-		switch (dialogNPCsTextField[1]) {
-		case 0:
-			String dialog0="Feministin Felicitas: Das haette dir woh so gepasst. Aber ich werde mir die \n"
-					+ "Unterdrückung des Patriarchats nicht weiter gefallen lassen du Chauvinist.";
-			
-			fonts.description.draw(game.batch, dialog0, 100, 190);
-			dialogNPCsTextField[1]=0;
-			
-			break;
 
-		default:
-			break;
+		switch (dialogNPCsTextField[1]) {
+			case 0:
+				String dialog0="Feministin Felicitas: Das haette dir woh so gepasst. Aber ich werde mir die \n"
+						+ "Unterdrückung des Patriarchats nicht weiter gefallen lassen du Chauvinist.";
+
+				fonts.description.draw(game.batch, dialog0, 100, 190);
+				dialogNPCsTextField[1]=0;
+
+				break;
+
+			default:
+				break;
 		}
-		
-		
-		
-		
+
+
+
+
 	}
-	
+
 	private void drawTextBox(){
 		game.batch.end();
 		shapeRenderer.begin(ShapeType.Filled);
@@ -328,11 +336,11 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		shapeRenderer.rect(positionX, positionY, boxWidth, boxHeight);
 		shapeRenderer.end();
 	}
-	
+
 	public void getValueOfLayerBlocked()
 			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
-		
+
 		/**
 		 * Nur nötig bei aktualissiierung der map
 		 */
@@ -346,7 +354,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		// System.out.println("ukupno:"+nodeList.getLength());
 
 		PrintWriter writer = new PrintWriter("aktmap.txt", "UTF-8");
-		
+
 		for (int i = 0; i < nodeList.getLength(); i++) {
 
 			Node nNode = nodeList.item(i);
@@ -370,17 +378,17 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 						 * Beides liefern das gleiche Ergebnis. Ergebnis sind
 						 * die ids der Kachelebene: "blocked"
 						 */
-//						System.out.println(an2.getTextContent());
-//						System.out.println(an2.getNodeValue());
+						//						System.out.println(an2.getTextContent());
+						//						System.out.println(an2.getNodeValue());
 
 						updateMap();
 
-						 if(i2==1){
-//						 fillArray(lines);
-						 writer.println(an2.getFirstChild().getTextContent());
-						 writer.close();
-						
-						 }
+						if(i2==1){
+							//						 fillArray(lines);
+							writer.println(an2.getFirstChild().getTextContent());
+							writer.close();
+
+						}
 
 
 
@@ -433,7 +441,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		} catch (IOException e) {
 			System.err.println("No such file!");
 		}
-		
+
 		/**
 		 * Kartenaktualisierung(id belegung der probemap.tmx wird an ein 2D
 		 * Array übergeben)
@@ -496,7 +504,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 
 		// collision right
 		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) +1] == 193 ||
-			arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) +2] == 193) {
+				arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16) +2] == 193) {
 			// System.exit(0);
 			System.err.println("Collision right");
 			return true;

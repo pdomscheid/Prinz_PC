@@ -6,7 +6,7 @@ import de.aps.prince_of_pc.screens.MenuScreen;
 public class PrinceGame extends Game {
 
 	//Window sizes
-	public static final int WIDTH = 1080;
+	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public SpriteBatch batch;
 
