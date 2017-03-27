@@ -184,14 +184,78 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 
 	private void startDialog() {
 		font.description.setColor(Color.WHITE);
-		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 131 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 131 && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[1]==true) {
+			//Feminist
 			System.err.println("Dialog möglich!");
+			dialogNPCs[1]=true;
 			dialogWithFeminist();
 		}else if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 130 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[0]==true) {
+			dialogNPCs[0]=true;
+			//Mark
 			System.err.println("Dialog mit mark möglich!");
 			dialogWithMark();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 132 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[2]==true){
+			//Nice Girl, Sister of Feminists
+			System.err.println("Dialog möglich!");
+			dialogWithNiceGirl();
+			dialogNPCs[2]=true;
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 133 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[3]==true){
+			//Detlef
+			dialogNPCs[3]=true;
+			dialogWithDetlef();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 134 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[4]==true){
+			
+		}
+		
+	}
+
+	private void dialogWithDetlef() {
+		drawTextBox();
+		String dialog3;
+		
+		switch (dialogNPCsTextField[3]) {
+		case 0:
+			dialog3="Detlef:Hey du Lauch! Komm mit mir ins Gym dort werde ich dich zu einem wahren Mann formen. \n"
+					+ "Erstmal checke ich aber ob du verstanden hast wie man richtig trainiert! \n"
+					+ "Was ist eine gutes Trainingsprogramm?";
+			font.description.draw(batch, dialog3, 100, 190);
+			
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[3]=1;
+			}
+			break;
+		case 1:
+			dialog3="Detlef: Du hast Potential kleiner!";
+			font.description.draw(batch, dialog3, 100, 190);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void dialogWithNiceGirl() {
+		drawTextBox();
+		String dialog2;
+		
+		switch (dialogNPCsTextField[2]) {
+		case 0:
+			dialog2="Schwester der Feministin: Hey mein kleiner. Du siehst ja völlig erschöpft aus, \n"
+					+ "komm doch in meinen Safespace und ruhe dich etwas aus.";
+			font.description.draw(batch, dialog2, 100, 190);
+			
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[2]=1;
+			}
+			break;
+		case 1:
+			dialog2="Ich liebe Blumen";
+		default:
+			break;
 		}
 		
 	}
@@ -213,7 +277,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			}
 			break;
 		case 1:
-			dialog0="Prince Gaylord: Ich suche meinen Prinzen.";
+			dialog0="Prince PC: Ich suche meinen Prinzen.";
 			font.description.draw(batch, dialog0, 100, 190);
 
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -222,10 +286,10 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			}
 			break;
 		case 2:
-			dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie süß. Bevor ich dir weiter helfe erkläre \n"
+			dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie sueß. Bevor ich dir weiter helfe erklaere \n"
 					+ "mir doch bitte was Manspredding ist?\n"
 					+ "a) Die Ausdehnung von Männern in klassisch weiblichen Berufen\n"
-					+ "b) Das breitbeinige sitzen von Männern\n"
+					+ "b) Das breitbeinige sitzen von Maennern\n"
 					+ "c) Eine Maskulinistische Bewegung zur Emanzipation von Männern";
 			font.description.draw(batch, dialog0, 100, 190);
 
@@ -237,8 +301,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			}
 			break;	
 		case 3:
-			dialog0="Emanzipation heißt nicht dem Mann »gleichwertig« werden zu wollen, sondern unsere Stärken zu \nerkennen"
-					+ "und sie zu leben, aber auch die Schwächen der Männer zu erkennen und sie zu akzeptieren. \n"
+			dialog0="Emanzipation heisst nicht dem Mann gleichwertig werden zu wollen, sondern unsere Stärken zu \nerkennen"
+					+ "und sie zu leben, aber auch die Schwaechen der Maenner zu erkennen und sie zu akzeptieren. \n"
 					+ "Nur wenn uns das gelingt, werden wir wahrhaft emanzipiert sein.";
 			font.description.draw(batch, dialog0, 100, 190);
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -276,7 +340,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	private void dialogWithMark(){
 		
 		drawTextBox();
-		dialogNPCs[0]=true;
+		
 		String dialog0;
 		switch (dialogNPCsTextField[0]) {
 		case 0:
@@ -287,10 +351,12 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 				
 				dialogNPCsTextField[0]=1;
+			}else {
+				
 			}
 			break;
 		case 1:
-			dialog0="Prince Gaylord: ...";
+			dialog0="Prince PC: ...";
 			font.description.draw(batch, dialog0, 100, 190);
 
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -486,7 +552,13 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			for (int k2 = 0, zahl = 0; k2 < lines.get(k).split(",").length; k2++) {
 				if (lines.get(k).split(",").length > 199) {
 					//System.out.println(lines.get(k).split(",").length);
-					if (lines.get(k).split(",")[k2].equals("193") || lines.get(k).split(",")[k2].equals("130") || lines.get(k).split(",")[k2].equals("0") || lines.get(k).split(",")[k2].equals("131")) {
+					if (lines.get(k).split(",")[k2].equals("193") || lines.get(k).split(",")[k2].equals("130") 
+							|| lines.get(k).split(",")[k2].equals("0") || lines.get(k).split(",")[k2].equals("131")
+							|| lines.get(k).split(",")[k2].equals("132") || lines.get(k).split(",")[k2].equals("133")
+							|| lines.get(k).split(",")[k2].equals("134") || lines.get(k).split(",")[k2].equals("135")
+							|| lines.get(k).split(",")[k2].equals("136") || lines.get(k).split(",")[k2].equals("137")
+							|| lines.get(k).split(",")[k2].equals("140") || lines.get(k).split(",")[k2].equals("139")
+							|| lines.get(k).split(",")[k2].equals("141") || lines.get(k).split(",")[k2].equals("142")) {
 						//System.out.print("WERT: " + lines.get(k).split(",")[k2] + ", ");
 
 						arr[indexFuerArray][zahl] = Integer.parseInt(lines.get(k).split(",")[k2]);
