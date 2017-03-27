@@ -58,7 +58,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	OrthographicCamera camera;
 	TiledMapRenderer tiledMapRenderer;
 	private SpriteBatch batch;
-	private Texture character;
+	private Texture character, character_up, character_left, character_right;
 	private Sprite playerSprite;
 	MyFonts font;
 	public int[][] arr = new int[200][200];
@@ -75,6 +75,9 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		batch = new SpriteBatch();
 		// Verschiedene Texturen fï¿½r Richtungen
 		character = new Texture(Gdx.files.internal("char_down.PNG"));
+		character_up = new Texture(Gdx.files.internal("char_up.PNG"));
+		character_left = new Texture(Gdx.files.internal("char_left.PNG"));
+		character_right = new Texture(Gdx.files.internal("char_right.PNG"));
 
 		// Map
 		tiledMap = new TmxMapLoader()
@@ -103,7 +106,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		} catch (XPathExpressionException | ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Fehler");
-			System.exit(0);
+			//System.exit(0);
 		}
 		
 		printArray();
@@ -148,7 +151,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		if (!collisionleft()) {
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 				camera.translate(-2f, 0);
-				// lastState = "left";
+				 lastState = "left";
 			}
 		}
 
@@ -156,26 +159,43 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				// player.translate(2f,0);
 				camera.translate(2f, 0);
-				// lastState = "right";
+				 lastState = "right";
 			}
 		}
 
 		if (!collisionup()) {
 			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				camera.translate(0, 2f);
-				// lastState = "up";
+				 lastState = "up";
 			}
 		}
 
 		if (!collisiondown()) {
 			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				camera.translate(0, -2f);
-				// lastState = "down";
+				 lastState = "down";
 			}
 		}
 
 		batch.begin();
 		
+		//Kontrollstruktur für Anzeige der Charaktertextur
+		          switch(lastState){
+		         case "up": 
+		         	 player.setTexture(character_up);
+		         	 break;
+		          case "down":
+		        	  player.setTexture(character);
+		         	 break;
+		          case "left":
+		        	  player.setTexture(character_left);
+		         	 break;
+		          case "right":
+		        	  player.setTexture(character_right);
+		         	 break;
+		          default:
+		        	  player.setTexture(character);
+		          }
 		
 		startDialog();
 		player.draw(batch);

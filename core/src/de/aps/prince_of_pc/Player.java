@@ -1,11 +1,9 @@
 package de.aps.prince_of_pc;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Sprite {
 	
@@ -14,8 +12,6 @@ public class Player extends Sprite {
 	float oldX;
 	float oldY;
 	
-	private Vector2 movement = new Vector2(0,0);
-    private Texture character;
     private TiledMapTileLayer collisionLayer;
     
 
