@@ -65,6 +65,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 	ShapeRenderer shapeRenderer;
 	boolean [] dialogNPCs=new boolean[12];
 	int [] dialogNPCsTextField=new int [12];
+	Sound sound;
+	long id;
 	
 	private String lastState = "down";
 
@@ -85,17 +87,18 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		shapeRenderer=new ShapeRenderer();
 		
 		//Sound
-		Sound sound = Gdx.audio.newSound(Gdx.files.internal("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/bilders-sound/02-the-superstar-saga.mp3"));
-
+		 sound = Gdx.audio.newSound(Gdx.files.internal("C:/Users/AsimB/OneDrive/Dokumente/GitHub/PC/Prinz_PC/core/assets/bilders-sound/02-the-superstar-saga.mp3"));
+		
 		// Spielercharacter erstellen
 		playerSprite = new Sprite(character);
 		player = new Player(playerSprite, (TiledMapTileLayer) tiledMap.getLayers().get("blocked"),
 				Gdx.graphics.getWidth() * 1f, Gdx.graphics.getHeight() * 4f);
 
 		Gdx.input.setInputProcessor(this);
-		sound.play(1.0f);
+		id=sound.play(1.0f);
 		sound.loop();
 		updateMap();
+		
 		
 		try {
 			getValueOfLayerBlocked();
@@ -105,6 +108,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			System.exit(0);
 		}
 		
+		
 		printArray();
 		
 		// Kamera
@@ -113,7 +117,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		camera = new OrthographicCamera(1280, 720);
 		camera.setToOrtho(false, w, h);
 		camera.position.set(player.getxPos(), player.getyPos(), 0);
-
+		
 	}
 
 	@Override
@@ -130,6 +134,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 
 		player.update();
 		colision();
+		
 		
 		
 		// System.out.println("Cam-Pos: "+camera.position);
@@ -939,7 +944,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 							|| lines.get(k).split(",")[k2].equals("134") || lines.get(k).split(",")[k2].equals("135")
 							|| lines.get(k).split(",")[k2].equals("136") || lines.get(k).split(",")[k2].equals("137")
 							|| lines.get(k).split(",")[k2].equals("138") || lines.get(k).split(",")[k2].equals("139")
-							|| lines.get(k).split(",")[k2].equals("140") || lines.get(k).split(",")[k2].equals("141")) {
+							|| lines.get(k).split(",")[k2].equals("140") || lines.get(k).split(",")[k2].equals("141")
+							|| lines.get(k).split(",")[k2].equals("7") || lines.get(k).split(",")[k2].equals("9")) {
 						//System.out.print("WERT: " + lines.get(k).split(",")[k2] + ", ");
 
 						arr[indexFuerArray][zahl] = Integer.parseInt(lines.get(k).split(",")[k2]);
