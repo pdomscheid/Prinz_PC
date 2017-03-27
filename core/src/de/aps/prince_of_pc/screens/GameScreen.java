@@ -50,6 +50,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	final float boxTop = PrinceGame.HEIGHT;
 	final float menueHeight = PrinceGame.HEIGHT - PrinceGame.HEIGHT * 0.015f;
 	boolean pause = false;
+	boolean intro = true;
 
 	//Game Settings
 	Player player;
@@ -121,6 +122,8 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		if(intro);
+
 		player.update();
 		colision();
 
@@ -130,15 +133,17 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		camera.update();
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
+
+		// Characterposition
+		player.setxPos(Gdx.graphics.getWidth() / 2);
+		player.setyPos(Gdx.graphics.getHeight() / 2);
+		player.setPosition(player.getxPos(), player.getyPos());
+
 		if(!pause && !startedDialog){
 			if(soundPause){
 				sound.play();
 				soundPause = false;
 			}
-			// Characterposition
-			player.setxPos(Gdx.graphics.getWidth() / 2);
-			player.setyPos(Gdx.graphics.getHeight() / 2);
-			player.setPosition(player.getxPos(), player.getyPos());
 
 			// Movement
 			if (!collisionleft()) {
@@ -186,7 +191,6 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	}
 
 	private void startDialog() {
-		startedDialog = true;
 		fonts.description.setColor(Color.WHITE);
 		if (arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 131 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[1]==true) {
@@ -202,7 +206,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	private void dialogWithFeminist() {
 		drawTextBox();
 		dialogNPCs[1]=true;
-
+		startedDialog = true;
 		switch (dialogNPCsTextField[1]) {
 			case 0:
 				String dialog0="Feministin Felicitas: Das haette dir woh so gepasst. Aber ich werde mir die \n"
