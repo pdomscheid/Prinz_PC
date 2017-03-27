@@ -200,8 +200,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 				|| dialogNPCs[2]==true){
 			//Nice Girl, Sister of Feminists
 			System.err.println("Dialog möglich!");
-			dialogWithNiceGirl();
 			dialogNPCs[2]=true;
+			dialogWithNiceGirl();
 		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 133 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[3]==true){
 			//Detlef
@@ -209,9 +209,271 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			dialogWithDetlef();
 		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 134 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
 				|| dialogNPCs[4]==true){
-			
+			//Security
+			dialogNPCs[4]=true;
+			dialogWithSecurity();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 135 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[5]==true){
+			//Ulrike
+			dialogNPCs[5]=true;
+			dialogWithUlrike();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 136 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[6]==true){
+			//Sascha
+			dialogNPCs[6]=true;
+			dialogWithSascha();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 137 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[7]==true){
+			//Jonas
+			dialogNPCs[7]=true;
+			dialogWithJonas();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 138 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[8]==true){
+			//Security
+			dialogNPCs[8]=true;
+			dialogWithDorfaelteste();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 139 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[9]==true){
+			//Security
+			dialogNPCs[9]=true;
+			dialogWithMark2();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 140 &&Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+				|| dialogNPCs[10]==true){
+			//Security
+			dialogNPCs[10]=true;
+			dialogWithKleinerBruder();
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1))][((int) camera.position.x / 16)] == 141 || dialogNPCs[11]==true){
+			//Security
+			dialogNPCs[11]=true;
+			dialogWithMarkFinal();
 		}
 		
+	}
+
+	private void dialogWithMarkFinal() {
+		drawTextBox();
+		String dialog11;
+		
+		switch (dialogNPCsTextField[11]) {
+		case 0:
+			dialog11="Du hast es geschafft mich bis hier zu verfolgen, aber so einfach werde ich nicht aufgeben. Um\n"
+					+ "deinen herzallerliebsten Prinzen zu befreien musst du mir erst diese Masterfrage beantworten, \n"
+					+ "sonst werde ich euch zwei einsperren und mit meiner gewaltigen und unfassbar komplexen \n"
+					+ "Normalmach-Maschine zu normalen Menschen machen.";
+			font.description.draw(batch, dialog11, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[11]=1;
+			}
+			break;
+		case 1:
+			dialog11="Mark: Wer sollte ein Jobangebot bekommen?\n"
+					+ "a) Der mit den besten Qualifikationen\n"
+					+ "b) Eine Frau oder eine Minderheit um eine bestimmte Quote zu erfüllen?\n"
+					+ "c) Donald Trump?";
+			font.description.draw(batch, dialog11, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+				
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
+				
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void dialogWithKleinerBruder() {
+		drawTextBox();
+		String dialog10;
+		
+		switch (dialogNPCsTextField[10]) {
+		case 0:
+			dialog10="Hey Prinz. Ich bin total verwirrt. Ich weiß einfach nicht was ich machen soll. Ich möchte \n"
+					+ "einem Mädchen den Hof machen, weiß aber einfach nicht was ich machen soll um nachher \n"
+					+ "nicht als Sexist oder Vergewaltiger zu gelten?";
+			font.description.draw(batch, dialog10, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[10]=1;
+			}
+			break;
+		case 1:
+			dialog10="Entscheide dich:\n"
+					+ "a) Ach was die Sorgen sind unbegründet mach ihr Komplimente und Zeige ihr, dass du \n"
+					+ "sie begehrst und Wertschätzt, dann wird es zu nichts schlimmen kommen.\n"
+					+ "b) Hier hast du ein Formular auf dem du und das Mädchen unterschreiben , dass sie \n"
+					+ "mit den hier vereinbarten Handlungen einverstanden sind.\n"
+					+ "c) Lass das mit den Frauen einfach und mach es wie ich und suche dir einen netten Freund";
+			font.description.draw(batch, dialog10, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+				dialogNPCsTextField[10]=2;
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.A)||Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				dialogNPCsTextField[10]=3;
+			}
+			break;
+		case 2:
+			dialog10="WOW, das ist eine fantastische Idee!";
+			font.description.draw(batch, dialog10, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[10]=4;
+			}
+			break;
+		case 3:
+			dialog10="Waaas? Das ist doch totaler Mist!";
+			font.description.draw(batch, dialog10, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[10]=0;
+			}
+			break;
+		case 4:
+			dialog10="Ja Ich habe gestern einen mysteriösen Mann gesehen, der einen Prinzen in den \n"
+					+ "unheimlichen Turm im Norden geschleppt hat. Dort solltest du nachsehen.";
+			font.description.draw(batch, dialog10, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[10]=false;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void dialogWithMark2() {
+		drawTextBox();
+		String dialog9="Mark: Hey ich kann dir immer noch nicht helfen. Mich verwirrt das ganze seltsame Gerede von euch \n"
+				+ "Wesen dieser Welt nur. Rede doch mit meinem kleinen Bruder auf der Nine-Gag-Lichtung im Wald \n"
+				+ "im Norden. Vielleicht kann er dir helfen, wenn du ihm mit seinen verrückten Problemen hilfst.";
+		font.description.draw(batch, dialog9, 100, 190);
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			dialogNPCs[9]=false;
+		}
+		
+	}
+
+	private void dialogWithDorfaelteste() {
+		drawTextBox();
+		String dialog8;
+		
+		switch (dialogNPCsTextField[8]) {
+		case 0:
+			dialog8="Dorfaelteste: So du hast also mit Jonas geredet *grml*, so ein Unfug \n"
+					+ "Kampfhubschrauber, was das denn für ein Bloedsinn sein?";
+			font.description.draw(batch, dialog8, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[8]=1;
+			}
+			break;
+		case 1:
+			dialog8="Entscheide dich:\n"
+					+ "a) Liebe Dorfälteste, sogar das allwissende Medium Facebook hat erkannt, dass es mehr \n"
+					+ "als zwei Gender gibt und man dort sein Sender freu bestimmen!\n"
+					+ "b) Sogar der amerikanische Kongress überlegt momentan ob es mehr als 34 Gender gibt ist das \n"
+					+ "nicht Grund genug Jonas zu akzeptieren?\n"
+					+ "c) Jeder Mensch fühlt sich halt wie er sich fühlt das ist normal";
+			font.description.draw(batch, dialog8, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+				dialogNPCsTextField[8]=2;
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				dialogNPCsTextField[8]=3;
+			}
+			break;
+		case 2:
+			dialog8="Dorfaelteste: Hmm so habe ich das noch nie gesehen. \n"
+					+ "Ich werde Jonas wohl so akzeptieren wie er ist.";
+			font.description.draw(batch, dialog8, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[8]=4;
+				dialogNPCsTextField[7]=1;
+			}
+			break;
+		case 3:
+			dialog8="Dorfaelteste: Was ein quatsch du bist ja genauso verrueckt wie Jonas";
+			font.description.draw(batch, dialog8, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[8]=0;
+			}
+			break;
+		case 4:
+			dialog8="Dorfaelteste: Im Westen ist eine einsame Huette vielleicht ist dein Prinz da.";
+			font.description.draw(batch, dialog8, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[8]=false;
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+	private void dialogWithJonas() {
+		drawTextBox();
+		String dialog7;
+		
+		switch (dialogNPCsTextField[7]) {
+		case 0:
+			dialog7="Jonas: Hey mein Prinz kannst du mir Bitte helfen? Die Dorfälteste möchte mich verstoßen und das nur\n"
+					+ "weil ich mich als Apachekampfhubschrauber fühle. Ich möchte mich einfach nicht in diese unsinnigen \n"
+					+ "Geschlechterrollen von Mann und Frau drängen lassen.";
+			font.description.draw(batch, dialog7, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[7]=false;
+			}
+			break;
+		case 1:
+			dialog7="Jonas: Nun fliege ich wie ein Apachekampfhubschrauber!";
+			font.description.draw(batch, dialog7, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[7]=false;
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+	private void dialogWithSascha() {
+		drawTextBox();
+		String dialog6;
+		
+		switch (dialogNPCsTextField[6]) {
+		case 0:
+			dialog6="Sascha: Was mache ich nur? Was mache ich nur?";
+			font.description.draw(batch, dialog6, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[6]=1;
+			}
+			break;
+		case 1:
+			dialog6="Prinz PC: ...";
+			font.description.draw(batch, dialog6, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[6]=2;
+			}
+			break;
+		case 2:
+			dialog6="Ah du suchst deinen Freund? Ich was mir nicht sicher ob es eine Entfuehrung oder einfach nur \n"
+					+ "eine sexuelle Vorliebe war. Ich wollte auf keinen fall intolerant sein.\n"
+					+ "Also da ich so hilfsbereit bin werde ich ohne Gegenleistung mein Wissen mit dir teilen!\n"
+					+ "Gestern Nacht sah ich wie ein mysteriöser Mann einen zweiten Mann gefesselt in Richtung \n"
+					+ "Westen zum See der eiskalten Engel schleppte.";
+			font.description.draw(batch, dialog6, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[6]=3;
+			}
+			break;
+		case 3:
+			dialog6="Ich wünsche dir alles Glück der Welt , auf das du und dein Prinz wieder glücklich vereint werdet.";
+			font.description.draw(batch, dialog6, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[6]=false;
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	private void dialogWithDetlef() {
@@ -221,8 +483,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 		switch (dialogNPCsTextField[3]) {
 		case 0:
 			dialog3="Detlef:Hey du Lauch! Komm mit mir ins Gym dort werde ich dich zu einem wahren Mann formen. \n"
-					+ "Erstmal checke ich aber ob du verstanden hast wie man richtig trainiert! \n"
-					+ "Was ist eine gutes Trainingsprogramm?";
+					+ "Erstmal checke ich aber ob du verstanden hast wie man richtig trainiert! \n";
 			font.description.draw(batch, dialog3, 100, 190);
 			
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -230,30 +491,149 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			}
 			break;
 		case 1:
-			dialog3="Detlef: Du hast Potential kleiner!";
+			dialog3="Was ist ein gutes Trainingsprogramm?\n"
+					+ "a) Brust und Bizeps \n"
+					+ "b) Ganzkörper\n"
+					+ "c) Beine";
 			font.description.draw(batch, dialog3, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+				dialogNPCsTextField[3]=2;	
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
+				dialogNPCsTextField[3]=3;
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				dialogNPCsTextField[3]=4;
+			}
+			break;
+			
+		case 2:
+			dialog3="Detlef: Ja da hast du recht, aber wenn ich es mir recht überlege sind bei dir Hopfen und Malz \n"
+					+ "verloren. Geh lieber nach Süden ins Dorf der Toleranz und rede mit \n"
+					+ "Ulrike da bist du besser aufgehoben.";
+			font.description.draw(batch, dialog3, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[3]=false;
+			}
+			
+			break;
+		case 3:
+			dialog3="Detlef: Komm wieder wenn du es besser weißt.";
+			font.description.draw(batch, dialog3, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[3]=0;
+			}
+			break;
+		case 4:
+			dialog3="Detlef: Man trainiert nicht die Beine, weil man sie im Club nicht sieht.";
+			font.description.draw(batch, dialog3, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[3]=0;
+			}
 			break;
 		default:
 			break;
 		}
 	}
+	
+	private void dialogWithSecurity(){
+		drawTextBox();
+		dialogNPCs[4]=true;
+		String dialog4;
+		
+		dialog4="Tuersteher: Hier ist nur Platz fuer wahre Maenner!";
+		font.description.draw(batch, dialog4, 100, 190);
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			dialogNPCs[4]=false;
+		}
+		
+	}
+	
+	private void dialogWithUlrike(){
+		drawTextBox();
+		dialogNPCs[5]=true;
+		String dialog5;
+		
+		switch (dialogNPCsTextField[5]) {
+		case 0:
+			dialog5="Ulrike: Black life matters!!!";
+			font.description.draw(batch, dialog5, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[5]=1;
+			}
+			break;
+		case 1:
+			dialog5="Prinz PC: Finde ich auch. Ich suche meinen Freund. Kannst du mir helfen?";
+			font.description.draw(batch, dialog5, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[5]=2;
+			}
+			break;
+		case 2:
+			dialog5="Oh du suchst deinen Freund? Hmm ich weiß nicht ob ich dir helfen moechte, ich habe Angst, \n"
+					+ "dass du ein Rassist bist.";
+			font.description.draw(batch, dialog5, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[5]=3;
+			}
+			break;
+		case 3:
+			dialog5="Beantworte mir doch schnell diese Frage, wie werden Menschen meiner Hautfarbe genannt?\n"
+					+ "a) Schwarze\n"
+					+ "b) Afroamerikaner\n"
+					+ "c) People of Color";
+			font.description.draw(batch, dialog5, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+				dialogNPCsTextField[5]=4;
+			}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.A)){
+				dialogNPCsTextField[5]=5;
+			}
+			break;
+		case 4:
+			dialog5="Wow endlich mal einer der sich auskennt. Rede doch mit Sasha er hat heute morgen etwas \n"
+					+ "in diese Richtung erwaehnt.";
+			font.description.draw(batch, dialog5, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[5]=false;
+			}
+			break;
+		case 5:
+			dialog5="AHHHHHH du Rassist!!!";
+			font.description.draw(batch, dialog5, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCsTextField[5]=0;
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
 
 	private void dialogWithNiceGirl() {
 		drawTextBox();
+		dialogNPCs[2]=true;
 		String dialog2;
 		
 		switch (dialogNPCsTextField[2]) {
 		case 0:
-			dialog2="Schwester der Feministin: Hey mein kleiner. Du siehst ja völlig erschöpft aus, \n"
+			dialog2="Schwester der Feministin: Hey mein kleiner. Du siehst ja voellig erschoepft aus, \n"
 					+ "komm doch in meinen Safespace und ruhe dich etwas aus.";
 			font.description.draw(batch, dialog2, 100, 190);
 			
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 				dialogNPCsTextField[2]=1;
+				
 			}
+			
 			break;
 		case 1:
-			dialog2="Ich liebe Blumen";
+			dialog2="Schwester der Feministin: Ich liebe es zu kochen!";
+			font.description.draw(batch, dialog2, 100, 190);
+			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				dialogNPCs[2]=false;
+			}
+			
+			break;
 		default:
 			break;
 		}
@@ -311,8 +691,9 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			}
 			break;
 		case 4:
-			dialog0="Hmm wenn ich es mir recht überlege habe ich gestern eine mysteriöse Gestalt gesehen, die \nsich in Richtung"
-					+ " Sueden davon machte. Schau dich doch im Dorf der Toleranz um. \nEin wunderbarer Ort…. *säuftz*";
+			dialog0="Hmm wenn ich es mir recht ueberlege habe ich gestern eine mysteriöse Gestalt gesehen, die \n"
+					+ "sich in Richtung Sueden davon machte. Schau dich doch im Dorf der Toleranz um. \n"
+					+ "Ein wunderbarer Ort…. *säuftz*";
 			font.description.draw(batch, dialog0, 100, 190);
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 				dialogNPCs[1]=false;
@@ -324,6 +705,7 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			font.description.draw(batch, dialog0, 100, 190);
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 				dialogNPCsTextField[1]=0;
+				dialogNPCs[1]=false;
 				
 			}
 			
@@ -351,8 +733,6 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 				
 				dialogNPCsTextField[0]=1;
-			}else {
-				
 			}
 			break;
 		case 1:
@@ -365,7 +745,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 			}
 			break;
 		case 2:
-			dialog0="Mysterioeser Typ: Ach du suchst deinen Freund? Es tut mir leid ich habe nichts gesehen,\naber gehe doch nach Südosten zur Feministin Felicias sie kann dir sicher weiterhelfen.";
+			dialog0="Mysterioeser Typ: Ach du suchst deinen Freund? Es tut mir leid ich habe nichts gesehen,\n"
+					+ "aber gehe doch nach Suedosten zur Feministin Felicias sie kann dir sicher weiterhelfen.";
 			font.description.draw(batch, dialog0, 100, 190);
 
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -557,8 +938,8 @@ public class PrinceGame extends ApplicationAdapter implements InputProcessor {
 							|| lines.get(k).split(",")[k2].equals("132") || lines.get(k).split(",")[k2].equals("133")
 							|| lines.get(k).split(",")[k2].equals("134") || lines.get(k).split(",")[k2].equals("135")
 							|| lines.get(k).split(",")[k2].equals("136") || lines.get(k).split(",")[k2].equals("137")
-							|| lines.get(k).split(",")[k2].equals("140") || lines.get(k).split(",")[k2].equals("139")
-							|| lines.get(k).split(",")[k2].equals("141") || lines.get(k).split(",")[k2].equals("142")) {
+							|| lines.get(k).split(",")[k2].equals("138") || lines.get(k).split(",")[k2].equals("139")
+							|| lines.get(k).split(",")[k2].equals("140") || lines.get(k).split(",")[k2].equals("141")) {
 						//System.out.print("WERT: " + lines.get(k).split(",")[k2] + ", ");
 
 						arr[indexFuerArray][zahl] = Integer.parseInt(lines.get(k).split(",")[k2]);
