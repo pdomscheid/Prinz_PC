@@ -122,8 +122,6 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		if(intro);
-
 		player.update();
 		colision();
 
@@ -139,7 +137,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		player.setyPos(Gdx.graphics.getHeight() / 2);
 		player.setPosition(player.getxPos(), player.getyPos());
 
-		if(!pause && !startedDialog){
+		if(!pause && !startedDialog && !intro){
 			if(soundPause){
 				sound.play();
 				soundPause = false;
@@ -181,6 +179,10 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		drawMenuBox();
 		game.batch.begin();
 		createMenue();
+		if(intro){
+			drawTextBox();
+			drawIntroText();
+		}
 
 		startDialog();
 
@@ -188,6 +190,18 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		game.batch.end();
 
+	}
+
+	private void drawIntroText() {
+		String introText = "Der Prinz wacht auf und sucht seinen schnuckeligen Freund. Allerdings Kann er ihn nirgendswo\n"
+				+ "erblicken. Voller Panik kreischt er auf und durchsucht seine gesamte Wohnung (Ja es\n"
+				+ "ist ein armer Prinz... Schluss mit den Klischees). Auf seinem Bett findet er voellig\n"
+				+ "aufgeloest eine Notiz ";
+		fonts.description.draw(game.batch, introText, 100, 190);
+		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
+			intro = false;
+		}
+		
 	}
 
 	private void startDialog() {
