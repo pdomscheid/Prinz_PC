@@ -76,9 +76,14 @@ public class DescriptionScreen extends Games implements Screen{
 				+ "kommt man dem\nZiel naeher. Bei falschen Antworten verliert man an Leben."
 				+ "Wenn alle Leben\naufgebraucht sind, ist das Spiel vorbei\n\n"
 				+ "Steuerung:" 
-				+ "Bewegung nach oben (w), nach links (a), nach unten (s), nach rechts (d)\n"
-				+ "Dialoge weiterklicken: Leertaste\n"
-				+ "Dialog beginnen: Leertaste";
+				+ "Man steuert den Prinzen mit den Pfeiltasten\n"
+				+ "NPCs werden mit der Leertaste angesprochen und um den Dialog weiterzuführen\n"
+				+ "muss die Enter-Taste betätigt werden\n"
+				+ "Die Fragenauswahl trifft man mit a, b, c\n\n"
+				+ "Tipp:\n"
+				+ "Die Fragen im Spiel sind nicht mit der logischen Antwort zu beantwroten,\n"
+				+ "sondern mit der politisch Korrekten oder einer satirischen Antwort";
+		
 		layout.setText(fonts.description, description);
 		float positionXDescription = PrinceGame.WIDTH / 2 - layout.width / 2 - 100;
 		float positionYDescription = PrinceGame.HEIGHT / 2 + layout.height / 2;
@@ -106,7 +111,7 @@ public class DescriptionScreen extends Games implements Screen{
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.DARK_GRAY);
 		shapeRenderer.rect(positionXBox, positionYBox, boxWidth, boxHeight);
-		shapeRenderer.rect(45, 200, 1000, 300);
+		shapeRenderer.rect(45, 150, 1000, 420);
 		shapeRenderer.end();
 
 		checkIfButtonIsClicked(positionXBox, positionYBox);
