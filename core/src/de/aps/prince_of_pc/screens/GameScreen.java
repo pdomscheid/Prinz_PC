@@ -803,16 +803,16 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				}
 				break;
 			case 2:
-				dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie sueß. Bevor ich dir weiter helfe erklaere \n"
+				dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie suess. Bevor ich dir weiter helfe erklaere \n"
 						+ "mir doch bitte was Manspredding ist?\n"
 						+ "a) Die Ausdehnung von Maennern in klassisch weiblichen Berufen\n"
 						+ "b) Das breitbeinige sitzen von Maennern\n"
-						+ "c) Eine Maskulinistische Bewegung zur Emanzipation von Männern";
+						+ "c) Eine Maskulinistische Bewegung zur Emanzipation von Maennern";
 				fonts.description.draw(game.batch, dialog0, 100, 190);
 
-				if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {				
+				if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {				
 					dialogNPCsTextField[1]=4;
-				}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				}else if(Gdx.input.isKeyJustPressed(Input.Keys.A) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
 					counterLeben--;
 					dialogNPCsTextField[1]=5;
 				}
@@ -831,7 +831,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			case 4:
 				dialog0="Hmm wenn ich es mir recht ueberlege habe ich gestern eine mysterioese Gestalt gesehen, die \n"
 						+ "sich in Richtung Sueden davon machte. Schau dich doch im Dorf der Toleranz um. \n"
-						+ "Ein wunderbarer Ort…. *säuftz*";
+						+ "Ein wunderbarer Ort…. *saeuftz*";
 				fonts.description.draw(game.batch, dialog0, 100, 190);
 				if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 					dialogNPCs[1]=false;
