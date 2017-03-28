@@ -52,6 +52,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	boolean pause = false;
 	boolean intro = true;
 	boolean endDialog = false;
+	int counterLeben = 3;
 
 	//Game Settings
 	Player player;
@@ -181,7 +182,12 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			sound.pause();
 			soundPause = true;
 		}
-		drawMenuBox();
+		if(counterLeben == 0){
+			this.dispose();
+			game.setScreen(new MenuScreen(game));
+		}else{
+			drawMenuBox();
+		}
 		game.batch.begin();
 		//Kontrollstruktur für Anzeige der Charaktertextur
 		switch(lastState){
@@ -206,13 +212,24 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			drawTextBox();
 			drawIntroText();
 		}
+		drawLiveDisplay();
 
-		startDialog();
+		if(counterLeben > 0){
+			startDialog();
+		}
 		if(!endDialog){
 			player.draw(game.batch);
 		}
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		game.batch.end();
+
+	}
+
+	private void drawLiveDisplay() {
+		String leben = "Leben: " + counterLeben;
+		fonts.description.setColor(Color.BLACK);
+		fonts.description.draw(game.batch, leben, 10, 680);
+		fonts.description.setColor(Color.WHITE);
 
 	}
 
@@ -346,7 +363,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 					game.setScreen(new MenuScreen(game));
 					startedDialog = false;
 				}
-				
+
 				break;
 			case 3:
 				drawBlackFullScreen();
@@ -402,6 +419,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 					dialogNPCsTextField[10]=2;
 				}else if(Gdx.input.isKeyJustPressed(Input.Keys.A)||Gdx.input.isKeyJustPressed(Input.Keys.C)){
 					dialogNPCsTextField[10]=3;
+					counterLeben--;
 				}
 				break;
 			case 2:
@@ -473,6 +491,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 					dialogNPCsTextField[8]=2;
 				}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
 					dialogNPCsTextField[8]=3;
+					counterLeben--;
 				}
 				break;
 			case 2:
@@ -604,8 +623,10 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 					dialogNPCsTextField[3]=2;	
 				}else if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
 					dialogNPCsTextField[3]=3;
+					counterLeben--;
 				}else if(Gdx.input.isKeyJustPressed(Input.Keys.C)){
 					dialogNPCsTextField[3]=4;
+					counterLeben--;
 				}
 				break;
 
@@ -694,6 +715,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 					dialogNPCsTextField[5]=4;
 				}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.A)){
 					dialogNPCsTextField[5]=5;
+					counterLeben--;
 				}
 				break;
 			case 4:
@@ -733,6 +755,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 					dialogNPCsTextField[2]=1;
 					startedDialog = false;
+					counterLeben++;
 				}
 
 				break;
@@ -788,7 +811,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {				
 					dialogNPCsTextField[1]=4;
 				}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
-
+					counterLeben--;
 					dialogNPCsTextField[1]=5;
 				}
 				break;	
