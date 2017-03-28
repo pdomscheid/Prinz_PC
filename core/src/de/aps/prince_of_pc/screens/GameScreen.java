@@ -54,6 +54,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	boolean endDialog = false;
 	int counterLeben = 3;
 	boolean beenden = false;
+	boolean neustart = false;
 
 	//Game Settings
 	Player player;
@@ -186,6 +187,9 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		if(counterLeben == 0 || beenden){
 			this.dispose();
 			game.setScreen(new MenuScreen(game));
+		}else if(neustart == true){
+			this.dispose();
+			game.setScreen(new GameScreen(game));
 		}else{
 			drawMenuBox();
 		}
@@ -209,14 +213,14 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		}
 
 		createMenue();
-		if(intro && !beenden){
+		if(intro && !beenden && !neustart){
 
 			drawTextBox();
 			drawIntroText();
 		}
 		drawLiveDisplay();
 
-		if(counterLeben > 0 && !beenden){
+		if(counterLeben > 0 && !beenden && !neustart){
 			startDialog();
 		}
 		if(!endDialog){
@@ -382,7 +386,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				drawBlackFullScreen();
 				endDialog = true;
 				dialog11="\n\n\nMark schnappt sich die beiden Prinzen und steckt Sie in seine Normalmach-Maschine. Nachdem die beiden\n"
-						+ "Prinzen zu „normalen heterosexuellen weißen Christen“ gemacht wurden, suchten sie sich eine Frau kauften eine\n"
+						+ "Prinzen zu „normalen heterosexuellen weissen Christen“ gemacht wurden, suchten sie sich eine Frau kauften eine\n"
 						+ "Doppelhaushaelfte bekamen Kinder und begingen mit 50 aus Verzweiflung und voller Unglueck selbstmord.";
 				fonts.description.draw(game.batch, dialog11, 5, 680);
 				if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
@@ -803,16 +807,16 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				}
 				break;
 			case 2:
-				dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie sueß. Bevor ich dir weiter helfe erklaere \n"
+				dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie suess. Bevor ich dir weiter helfe erklaere \n"
 						+ "mir doch bitte was Manspredding ist?\n"
 						+ "a) Die Ausdehnung von Maennern in klassisch weiblichen Berufen\n"
 						+ "b) Das breitbeinige sitzen von Maennern\n"
-						+ "c) Eine Maskulinistische Bewegung zur Emanzipation von Männern";
+						+ "c) Eine Maskulinistische Bewegung zur Emanzipation von Maennern";
 				fonts.description.draw(game.batch, dialog0, 100, 190);
 
-				if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {				
+				if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {				
 					dialogNPCsTextField[1]=4;
-				}else if(Gdx.input.isKeyJustPressed(Input.Keys.B) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				}else if(Gdx.input.isKeyJustPressed(Input.Keys.A) || Gdx.input.isKeyJustPressed(Input.Keys.C)){
 					counterLeben--;
 					dialogNPCsTextField[1]=5;
 				}
@@ -831,7 +835,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			case 4:
 				dialog0="Hmm wenn ich es mir recht ueberlege habe ich gestern eine mysterioese Gestalt gesehen, die \n"
 						+ "sich in Richtung Sueden davon machte. Schau dich doch im Dorf der Toleranz um. \n"
-						+ "Ein wunderbarer Ort…. *säuftz*";
+						+ "Ein wunderbarer Ort…. *saeuftz*";
 				fonts.description.draw(game.batch, dialog0, 100, 190);
 				if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 					dialogNPCs[1]=false;
@@ -968,8 +972,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		if(Gdx.input.isButtonPressed(Buttons.LEFT)){
 			// Restart/Pause/Continues or Close is pressed
 			if(ToolMethods.checkIfMouseIsInTheArea(positionXRestart, boxBottom, positionSecondXRestart, boxTop)){
-				this.dispose();
-				game.setScreen(new GameScreen(game));
+				neustart = true;
 			} else if(ToolMethods.checkIfMouseIsInTheArea(positionXPause, boxBottom, positionSecondXPause, boxTop)){
 				this.pause = true;
 			} else if(ToolMethods.checkIfMouseIsInTheArea(positionXContinues, boxBottom, positionSecondXContinues, boxTop)){
