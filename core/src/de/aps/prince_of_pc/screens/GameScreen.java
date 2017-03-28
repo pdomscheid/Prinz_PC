@@ -101,7 +101,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		Gdx.input.setInputProcessor(this);
 		sound.play(1.0f);
 		isSoundActive=true;
-		
+		sound.loop();
 		
 		updateMap();
 
@@ -425,8 +425,8 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		startedDialog = true;
 		switch (dialogNPCsTextField[10]) {
 			case 0:
-				dialog10="Hey Prinz. Ich bin total verwirrt. Ich weiß einfach nicht was ich machen soll. Ich moechte \n"
-						+ "einem Maedchen den Hof machen, weiß aber einfach nicht was ich machen soll um nachher \n"
+				dialog10="Hey Prinz. Ich bin total verwirrt. Ich weiss einfach nicht was ich machen soll. Ich moechte \n"
+						+ "einem Maedchen den Hof machen, weiss aber einfach nicht was ich machen soll um nachher \n"
 						+ "nicht als Sexist oder Vergewaltiger zu gelten?";
 				fonts.description.draw(game.batch, dialog10, 100, 190);
 				if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -558,7 +558,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		startedDialog = true;
 		switch (dialogNPCsTextField[7]) {
 			case 0:
-				dialog7="Jonas: Hey mein Prinz kannst du mir Bitte helfen? Die Dorfaelteste moechte mich verstoßen und\n"
+				dialog7="Jonas: Hey mein Prinz kannst du mir Bitte helfen? Die Dorfaelteste moechte mich verstossen und\n"
 						+ "das nur weil ich mich als Apachekampfhubschrauber fuehle. Ich moechte mich einfach nicht\n"
 						+ "in diese unsinnigen Geschlechterrollen von Mann und Frau draengen lassen.";
 				fonts.description.draw(game.batch, dialog7, 100, 190);
@@ -668,7 +668,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 
 				break;
 			case 3:
-				dialog3="Detlef: Komm wieder wenn du es besser weißt.";
+				dialog3="Detlef: Komm wieder wenn du es besser weisst.";
 				fonts.description.draw(game.batch, dialog3, 100, 190);
 				if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 					dialogNPCsTextField[3]=0;
@@ -724,7 +724,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				}
 				break;
 			case 2:
-				dialog5="Oh du suchst deinen Freund? Hmm ich weiß nicht ob ich dir helfen moechte, ich habe Angst, \n"
+				dialog5="Oh du suchst deinen Freund? Hmm ich weiss nicht ob ich dir helfen moechte, ich habe Angst, \n"
 						+ "dass du ein Rassist bist.";
 				fonts.description.draw(game.batch, dialog5, 100, 190);
 				if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -827,7 +827,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				}
 				break;
 			case 2:
-				dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie suess. Bevor ich dir weiter helfe erklaere \n"
+				dialog0="Feministin Felicias:Ach du suchst deinen Freund? Wie suess. Bevor ich dir weiter helfe, erklaere \n"
 						+ "mir doch bitte was Manspredding ist?\n"
 						+ "a) Die Ausdehnung von Maennern in klassisch weiblichen Berufen\n"
 						+ "b) Das breitbeinige sitzen von Maennern\n"
@@ -853,7 +853,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 				}
 				break;
 			case 4:
-				dialog0="Hmm wenn ich es mir recht ueberlege habe ich gestern eine mysterioese Gestalt gesehen, die \n"
+				dialog0="Hmm, wenn ich es mir recht ueberlege, habe ich gestern eine mysterioese Gestalt gesehen, die \n"
 						+ "sich in Richtung Sueden davon machte. Schau dich doch im Dorf der Toleranz um. \n"
 						+ "Ein wunderbarer Ort…. *saeuftz*";
 				fonts.description.draw(game.batch, dialog0, 100, 190);
