@@ -55,6 +55,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	int counterLeben = 3;
 	boolean beenden = false;
 	boolean neustart = false;
+	boolean isSoundActive;
 
 	//Game Settings
 	Player player;
@@ -68,6 +69,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	boolean [] dialogNPCs=new boolean[12];
 	int [] dialogNPCsTextField=new int [12];
 	Sound sound;
+	Sound sound2;
 	boolean soundPause = false;
 	boolean startedDialog = false;
 	String lastState = "down";
@@ -90,7 +92,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 
 		//Sound
 		sound = Gdx.audio.newSound(Gdx.files.internal("bilders-sound/02-the-superstar-saga.mp3"));
-
+		sound2=Gdx.audio.newSound(Gdx.files.internal("bilders-sound/marioss-dramatic.mp3"));
 		// Spielercharacter erstellen
 		playerSprite = new Sprite(character);
 		player = new Player(playerSprite, (TiledMapTileLayer) tiledMap.getLayers().get("blocked"),
@@ -98,7 +100,9 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 
 		Gdx.input.setInputProcessor(this);
 		sound.play(1.0f);
-		sound.loop();
+		isSoundActive=true;
+		
+		
 		updateMap();
 
 		try {
@@ -132,22 +136,37 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 
 		player.update();
 		colision();
-
-
+		if (arr[(((int) camera.position.y / 16 - 199) * (-1)) + 1][((int) camera.position.x / 16)] == 7) {
+			sound.pause();
+			sound2.play(1.0f);
+			isSoundActive=false;
+		}else if(arr[(((int) camera.position.y / 16 - 199) * (-1)) + 1][((int) camera.position.x / 16)] == 9){
+			sound2.pause();
+			sound.pause();
+			isSoundActive=true;
+			sound.play(1.0f);
+		}
+		
 		// System.out.println("Cam-Pos: "+camera.position);
 		// Kamera u. Map rendern
 		camera.update();
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
-
+		System.out.println("Kamera-Position: x: "+camera.position.x/16+", y: "+camera.position.y/16);
+		
 		// Characterposition
 		player.setxPos(Gdx.graphics.getWidth() / 2);
 		player.setyPos(Gdx.graphics.getHeight() / 2);
 		player.setPosition(player.getxPos(), player.getyPos());
-
+		
 		if(!pause && !startedDialog && !intro){
 			if(soundPause){
-				sound.play();
+				
+				if(camera.position.x / 16 >123 && camera.position.y / 16 >124){
+					sound2.play(1.0f);
+				}else{
+					sound.play();
+				}
 				soundPause = false;
 			}
 
@@ -182,6 +201,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			}
 		} else if(pause){
 			sound.pause();
+			sound2.pause();
 			soundPause = true;
 		}
 		if(counterLeben == 0 || beenden){
@@ -1235,6 +1255,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		tiledMap.dispose();
 		character.dispose();
 		sound.dispose();
+		sound2.dispose();
 	}
 
 	@Override
