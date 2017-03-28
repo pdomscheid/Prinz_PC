@@ -53,6 +53,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 	boolean intro = true;
 	boolean endDialog = false;
 	int counterLeben = 3;
+	boolean beenden = false;
 
 	//Game Settings
 	Player player;
@@ -182,7 +183,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			sound.pause();
 			soundPause = true;
 		}
-		if(counterLeben == 0){
+		if(counterLeben == 0 || beenden){
 			this.dispose();
 			game.setScreen(new MenuScreen(game));
 		}else{
@@ -208,13 +209,14 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 		}
 
 		createMenue();
-		if(intro){
+		if(intro && !beenden){
+
 			drawTextBox();
 			drawIntroText();
 		}
 		drawLiveDisplay();
 
-		if(counterLeben > 0){
+		if(counterLeben > 0 && !beenden){
 			startDialog();
 		}
 		if(!endDialog){
@@ -973,8 +975,7 @@ public class GameScreen extends Games implements Screen, InputProcessor{
 			} else if(ToolMethods.checkIfMouseIsInTheArea(positionXContinues, boxBottom, positionSecondXContinues, boxTop)){
 				this.pause = false;
 			} else if(ToolMethods.checkIfMouseIsInTheArea(positionXClose, boxBottom, positionSecondXClose, boxTop)){
-				this.dispose();
-				game.setScreen(new MenuScreen(game));
+				beenden = true;
 			}
 		}
 	}
